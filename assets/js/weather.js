@@ -26,10 +26,12 @@ function getWeather(location){
         temp = data.current.temp_f;
         description = data.current.condition.text;
         icon = data.current.condition.icon;
+
+        icon = icon.substring(icon.indexOf(".png")-3, icon.indexOf(".png"));
         
         var newDiv = $("<div>");
         var p = $("<p class='text-left'>")
-        p.append("<img src='http:"+icon+"' alt='Icon depicting current weather.'>")
+        p.append("<img src='assets/images/"+icon+".png' alt='Icon depicting current weather.'>")
         p.append("<h2>" + temp + "°F</h2>")
         p.append("<h4>" + description + "</h4>")
         newDiv.append(p);
