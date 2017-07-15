@@ -27,13 +27,13 @@ function getWeather(location){
         description = data.current.condition.text;
         icon = data.current.condition.icon;
         
-        var newDiv = $("<div><p text-center>");
-
-        newDiv.append("<img src='http:"+icon+"' alt='Icon depicting current weather.'>")
-        newDiv.append("<h2>" + temp + "</h2>")
-        newDiv.append("<h4>" + description + "</h4>")
-
+        var newDiv = $("<div>");
+        var p = $("<p class='text-center'>")
+        p.append("<img src='http:"+icon+"' alt='Icon depicting current weather.'>")
+        p.append("<h2>" + temp + "°F</h2>")
+        p.append("<h4>" + description + "</h4>")
+        newDiv.append(p);
         $("#weatherPane").append(newDiv);
-        debugger;
+
     });
 }
