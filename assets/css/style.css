@@ -2,3 +2,8 @@ body {
   background-color: #000;
   text: #fff;
 }
+
+#quotePane {
+  position: fixed;
+  bottom: 0px;
+}
