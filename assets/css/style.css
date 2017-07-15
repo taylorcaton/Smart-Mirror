@@ -15,3 +15,16 @@ h4 {
   position: fixed;
   bottom: 0px;
 }
+
+#digitalClock {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+    width: 200px;
+    padding: 10px;
+    border:1px solid #000000;
+}
+ 
+#analogClock {
+    padding: 10px;
+}
