@@ -28,7 +28,7 @@ function getWeather(location){
         icon = data.current.condition.icon;
         
         var newDiv = $("<div>");
-        var p = $("<p class='text-center'>")
+        var p = $("<p class='text-left'>")
         p.append("<img src='http:"+icon+"' alt='Icon depicting current weather.'>")
         p.append("<h2>" + temp + "°F</h2>")
         p.append("<h4>" + description + "</h4>")
