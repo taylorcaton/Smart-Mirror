@@ -1,4 +1,6 @@
 var temp;
+var icon;
+var description;
 
 function getWeather(location){
 
@@ -19,12 +21,19 @@ function getWeather(location){
 
         // Log the resulting object
         console.log(data);
-        
         console.log("Temperature (F): " + data.current.temp_f);
-        temp = data.current.temp_f;
-        
-        $(".icon").html("<img src='http:"+data.current.condition.icon+"' alt='Icon depicting current weather.'>");
-        $(".description").html("<h2>" + data.current.condition.text + "</h2>");
 
+        temp = data.current.temp_f;
+        description = data.current.condition.text;
+        icon = data.current.condition.icon;
+        
+        var newDiv = $("<div><p text-center>");
+
+        newDiv.append("<img src='http:"+icon+"' alt='Icon depicting current weather.'>")
+        newDiv.append("<h2>" + temp + "</h2>")
+        newDiv.append("<h4>" + description + "</h4>")
+
+        $("#weatherPane").append(newDiv);
+        debugger;
     });
 }
