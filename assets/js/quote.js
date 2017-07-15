@@ -8,11 +8,10 @@ function showQuote(){
 		dataType: "jsonp",
 		data: "method=getQuote&format=jsonp&lang=en&jsonp=?",
 		success: function( response ) {
+			var quoteText = response.quoteText;
+			var quoteAuthor = response.quoteAuthor;
+			var temp = 
 			console.log(response);
-		$("#random_quote").html("<p id='random_quote' class='lead text-center'>" +
-		response.quoteText + "<br/>&dash; " + response.quoteAuthor + " &dash;</p>");
-		$("#tweet").attr("href", "https://twitter.com/home/?status=" + response.quoteText +
-		' (' + response.quoteAuthor + ')');
 		}
 	});
 }
