@@ -2,17 +2,45 @@ document.addEventListener("DOMContentLoaded", function() {
   startTimer();
 });
 
+
 function displayTime(){
 
-  var time = new Date();
-  var hour = time.getHours();
-  var minute = time.getMinutes();
-  var second = time.getSeconds();
+  // var time = new Date();
+  // var hour = time.getHours();
+  // var minute = time.getMinutes();
+  // var second = time.getSeconds();
 
-  var timeString = formatHour(hour) + ":" + padZero(minute) + ":" + padZero(second) + " " + getTimePeriod(hour);
+  var time = moment();
+  var hour = time.hour();
+  var minute = time.minutes();
+  var second = time.seconds();
+  var year = time.year();
+  var month = time.month();
+  var day = time.date();
+  var dayOfWeek = time.isoWeekday();
 
-  document.querySelector("#digitalClock").innerHTML = timeString;
+  // console.log(time);
+  // console.log(hour);
+  // console.log(minute);
+  // console.log(second);
+  // console.log(year);
+  // console.log(month);
+  // console.log(day);
+  // console.log(dayOfWeek);
 
+  var timeString = formatHour(hour) + ":" + padZero(minute) + ":" + padZero(second) + " " + getTimePeriod(hour)
+  var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + day + ", " + year;
+  
+  // var dateFormat = ("dddd MMMM Do, YYYY");
+  // var timeFormat = ("hh:mm:ss");
+  // var convertedTime = moment(timeStr, timeFormat);
+  // var timeString = formatHour(hour) + ":" + padZero(minute) + ":" + padZero(second) + " " + getTimePeriod(hour);
+  // var timeDisplay = ;
+  
+  $("#digitalClock").empty();
+  $("#digitalClock").append(dateString);
+  $("#digitalClock").append($("<br>"));
+  $("#digitalClock").append(timeString);
   // Creating the Analog Clock
   var canvas = document.querySelector("#analogClock");
   var contextHands = canvas.getContext("2d");
@@ -35,7 +63,7 @@ function displayTime(){
     contextClock.stroke();
   }// End drawClockFace()
 
-  // Create Hour Hand
+  // Create Hour Hands
   Math.TAU = 2 * Math.PI;
 
   function drawArm(progress, armThickness, armLength, armColor) {
@@ -52,6 +80,20 @@ function displayTime(){
     contextHands.lineTo(targetX, targetY); // Draw a line outwards
     contextHands.stroke();
   }// End drawArm()
+
+  // function drawNotches(){
+  //   var armRadians = (Math.TAU * progress) - (Math.TAU/4);
+  //   var targetX = clockX + Math.cos(armRadians) * (armLength * clockRadius);
+  //   var targetY = clockY + Math.sin(armRadians) * (armLength * clockRadius);
+
+  //   contextHands.lineWidth = armThickness;
+  //   contextHands.strokeStyle = armColor;
+
+  //   contextHands.beginPath(); // Get ready to draw
+  //   contextHands.moveTo(clockX, clockY); // Start at the center
+  //   contextHands.lineTo(targetX, targetY); // Draw a line outwards
+  //   contextHands.stroke();
+  // }// End drawNotches()
 
   // Clear the canvas then draw the current arms
   // Functioning Correctly
@@ -85,6 +127,75 @@ function formatHour(h) {
 function getTimePeriod(h) {
   return (h < 12) ? "AM" : "PM"; 
 } // end getTimePeriod
+
+function formatDayOfWeek(dayCheck){
+  var day = dayCheck;
+  switch(day){
+    case 1:
+      day = "Monday";
+      break;
+    case 2:
+      day = "Tuesday";
+      break;
+    case 3:
+      day = "Wednesday";
+      break;
+    case 4:
+      day = "Thursday";
+      break;
+    case 5:
+      day = "Friday";
+      break;
+    case 6:
+      day = "Saturday";
+      break;
+    case 7:
+      day = "Sunday";
+  }
+  return String(day);
+}// end formatDayOfWeek()
+
+function formatMonth(monthCheck){
+  var month = monthCheck;
+  switch(month){
+    case 1:
+      month = "January";
+      break;
+    case 2:
+      month = "February";
+      break;
+    case 3:
+      month = "March";
+      break;
+    case 4:
+      month = "April";
+      break;
+    case 5:
+      month = "May";
+      break;
+    case 6:
+      month = "June";
+      break;
+    case 7:
+      month = "July";
+      break;
+    case 8:
+      month = "August";
+      break;
+    case 9:
+      month = "September";
+      break;
+    case 10:
+      month = "October";
+      break;
+    case 11:
+      month = "November";
+      break;
+    case 12:
+      month = "December"; 
+  }
+  return String(month);
+}// end formatMonth()
 
 function startTimer(){
   setInterval(displayTime, 1000);
