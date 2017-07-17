@@ -7,7 +7,6 @@
     storageBucket: "group-2a92e.appspot.com",
     messagingSenderId: "867800674419"
   };
-  firebase.initializeApp(config);
 
   db = firebase.database();
 
