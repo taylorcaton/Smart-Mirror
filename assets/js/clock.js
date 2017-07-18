@@ -188,3 +188,27 @@ function startTimer(){
   setInterval(displayTime, 1000);
   displayTime();
 } // end startTimer()
+
+function showDigitalClock(){
+  $("#digitalClock").show()
+} // end showDigitalClock()
+
+function showAnalogClock(){
+  $("#analogClock").show()
+} // end showAnalogClock()
+
+function hideDigitalClock(){
+  $("#digitalClock").hide()
+} // end hideDigitalClock()
+
+function hideAnalogClock(){
+  $("#analogClock").hide()
+} // end hideAnalogClock()
+
+function show24HourTime(){
+
+} // end show24HoutTime()
+
+function show12HourTime(){
+
+} // end show12HourTime()
