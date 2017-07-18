@@ -22,6 +22,9 @@ $(document).ready(function() {
     $('#enableQuote').prop('checked', sv.quoteOn);
     $('#digitalAnalogVal').val(sv.clockStyle);
     $('#milTimeVal').val(sv.digitalClockStyle);
+    if (sv.clockStyle === 'analog') {
+      $('#milTimeVal').prop('disabled', 'disabled');
+    }
   })
 
 
@@ -66,6 +69,7 @@ $(document).ready(function() {
 
 //===== Database Listeners ==========================================================
 
+  // NEEDS WORK - Should read changes to 'locationReturned'
   db.ref().on('value', function(snap) {
     var sv = snap.val();
     console.log(sv.location);

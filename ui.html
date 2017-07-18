@@ -11,84 +11,86 @@
   </head>
   <body>
     <div id="jumbotron" class="jumbotron jumbotron-fluid">
-      <h1>Magic Mirror</h1>
+      <h1>Mirror, Mirror...</h1>
       <a href="index.html" class="btn btn-warning" role="button">Preview</a>
     </div>
     <div class="container">
-      <!-- The Weather Section -->
       <div class="row">
-        <div class="panel panel-default">
-          <div class="panel-heading">Weather</div>
-          <div class="panel-body">
-            <form>
-              <!-- Display Returned Location -->
-              <h4 id="currentLoc"></h4>
-              <!-- Location Form -->
-              <div class="form-group">
-                <label for="myLocation">Update your location</label>
-                <input type="" class="form-control" id="myLocation" placeholder="Use postal code or city">
-              </div>
-              <!-- Enable weather checkbox -->
-              <div class="form-check">
-                <label class="form-check-label active">
-                  <input id="enableWeather" type="checkbox" class="form-check-input" checked="checked">
-                  Enable Weather
-                </label>
-              </div>
-              <button id="submitWeather" type="submit" class="btn btn-default">Submit</button>
-            </form>
+        <!-- The Weather Section -->
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">Weather</div>
+            <div class="panel-body">
+              <form>
+                <!-- Display Returned Location -->
+                <h4 id="currentLoc"></h4>
+                <!-- Location Form -->
+                <div class="form-group">
+                  <label for="myLocation">Update your location</label>
+                  <input type="" class="form-control" id="myLocation" placeholder="Use postal code or city">
+                </div>
+                <!-- Enable weather checkbox -->
+                <div class="form-check">
+                  <label class="form-check-label active">
+                    <input id="enableWeather" type="checkbox" class="form-check-input" checked="checked">
+                    Enable Weather
+                  </label>
+                </div>
+                <button id="submitWeather" type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- The Clock Section -->
-      <div class="row">
-        <div class="panel panel-default">
-          <div class="panel-heading">Clock</div>
-          <div class="panel-body">
-            <form>
-              <!-- Digital / Analog -->
-              <div id="digitalAnalog" class="form-group">
-                <label for="digitalAnalogVal">Clock Style</label>
-                <select class="form-control" id="digitalAnalogVal">
-                  <option value="analog">Analog</option>
-                  <option value="digital">Digital</option>
-                </select>
-              </div>
-              <!-- 12 hour / Military time -->
-              <div id="militaryTime" class="form-group">
-                <label for="milTimeVal">Digital Format</label>
-                <select class="form-control" id="milTimeVal" disabled>
-                  <option value="twelveHour">12 Hour</option>
-                  <option value="military">Military</option>
-                </select>
-              </div>
-              <!-- Enable Clock checkbox -->
-              <div class="form-check">
-                <label class="form-check-label active">
-                  <input id="enableClock" type="checkbox" class="form-check-input" checked="checked">
-                  Enable Clock
-                </label>
-              </div>
-              <button id="submitClock" type="submit" class="btn btn-default">Submit</button>
-            </form>
+        <!-- The Clock Section -->
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">Clock</div>
+            <div class="panel-body">
+              <form>
+                <!-- Digital / Analog -->
+                <div id="digitalAnalog" class="form-group">
+                  <label for="digitalAnalogVal">Clock Style</label>
+                  <select class="form-control" id="digitalAnalogVal">
+                    <option value="analog">Analog</option>
+                    <option value="digital">Digital</option>
+                  </select>
+                </div>
+                <!-- 12 hour / Military time -->
+                <div id="militaryTime" class="form-group">
+                  <label for="milTimeVal">Digital Format</label>
+                  <select class="form-control" id="milTimeVal">
+                    <option value="twelveHour">12 Hour</option>
+                    <option value="military">Military</option>
+                  </select>
+                </div>
+                <!-- Enable Clock checkbox -->
+                <div class="form-check">
+                  <label class="form-check-label active">
+                    <input id="enableClock" type="checkbox" class="form-check-input" checked="checked">
+                    Enable Clock
+                  </label>
+                </div>
+                <button id="submitClock" type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- The Quote Section -->
-      <div class="row">
-        <div class="panel panel-default">
-          <div class="panel-heading">Quotes</div>
-          <div class="panel-body">
-            <form>
-              <!-- Enable Quote checkbox -->
-              <div class="form-check">
-                <label class="form-check-label active">
-                  <input id="enableQuote" type="checkbox" class="form-check-input" checked="checked">
-                  Enable Quotes
-                </label>
-              </div>
-              <button id="submitQuote" type="submit" class="btn btn-default">Submit</button>
-            </form>
+        <!-- The Quote Section -->
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">Quotes</div>
+            <div class="panel-body">
+              <form>
+                <!-- Enable Quote checkbox -->
+                <div class="form-check">
+                  <label class="form-check-label active">
+                    <input id="enableQuote" type="checkbox" class="form-check-input" checked="checked">
+                    Enable Quotes
+                  </label>
+                </div>
+                <button id="submitQuote" type="submit" class="btn btn-default">Submit</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
