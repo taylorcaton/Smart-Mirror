@@ -3,13 +3,9 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+
 function displayTime(){
-
-  // var time = new Date();
-  // var hour = time.getHours();
-  // var minute = time.getMinutes();
-  // var second = time.getSeconds();
-
+  // Inital Variables
   var time = moment();
   var hour = time.hour();
   var minute = time.minutes();
@@ -18,42 +14,28 @@ function displayTime(){
   var month = time.month();
   var day = time.date();
   var dayOfWeek = time.isoWeekday();
-
-  // console.log(time);
-  // console.log(hour);
-  // console.log(minute);
-  // console.log(second);
-  // console.log(year);
-  // console.log(month);
-  // console.log(day);
-  // console.log(dayOfWeek);
-
-  var timeString = formatHour(hour) + ":" + padZero(minute) + ":" + padZero(second) + " " + getTimePeriod(hour)
+  var timeString12Hour = formatHour(hour) + ":" + padZero(minute) + " " + getTimePeriod(hour);
+  var timeString24Hour = padZero(hour) + ":" + padZero(minute);
   var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + day + ", " + year;
-  
-  // var dateFormat = ("dddd MMMM Do, YYYY");
-  // var timeFormat = ("hh:mm:ss");
-  // var convertedTime = moment(timeStr, timeFormat);
-  // var timeString = formatHour(hour) + ":" + padZero(minute) + ":" + padZero(second) + " " + getTimePeriod(hour);
-  // var timeDisplay = ;
-  
+  var timeZone = // this needs to come from the database.
+  // Set Clock on html
   $("#digitalClock").empty();
   $("#digitalClock").append(dateString);
   $("#digitalClock").append($("<br>"));
-  $("#digitalClock").append(timeString);
+  $("#digitalClock").append(timeString24Hour);
   // Creating the Analog Clock
   var canvas = document.querySelector("#analogClock");
+  var context = canvas.getContext('2d');
   var contextHands = canvas.getContext("2d");
   var contextClock = canvas.getContext("2d");
   var clockRadius = 100;
-
+  var secHandLength = 60;
   // Define center of clock
   var clockX = canvas.width / 2;
   var clockY = canvas.height / 2;
 
   // Create clock face
   function drawClockFace(fill, outline){
-    // Not Working
     contextClock.beginPath();
     contextClock.arc(clockX, clockY, 97, 0 * Math.PI, 2 * Math.PI);
     contextClock.fillStyle = fill;
@@ -81,28 +63,33 @@ function displayTime(){
     contextHands.stroke();
   }// End drawArm()
 
-  // function drawNotches(){
-  //   var armRadians = (Math.TAU * progress) - (Math.TAU/4);
-  //   var targetX = clockX + Math.cos(armRadians) * (armLength * clockRadius);
-  //   var targetY = clockY + Math.sin(armRadians) * (armLength * clockRadius);
+  function drawNotches() {
+    for (var i = 0; i < 12; i++) {
+      angle = (i - 3) * (Math.PI * 2) / 12; // Creates the Angle for the hour notches
+      context.lineWidth = 2; // Defines the notch width
+      context.beginPath();
 
-  //   contextHands.lineWidth = armThickness;
-  //   contextHands.strokeStyle = armColor;
+      var x1 = (canvas.width / 2) + Math.cos(angle) * (secHandLength * 1.5);
+      var y1 = (canvas.height / 2) + Math.sin(angle) * (secHandLength * 1.5);
+      var x2 = (canvas.width / 2) + Math.cos(angle) * (secHandLength - (secHandLength / 24));
+      var y2 = (canvas.height / 2) + Math.sin(angle) * (secHandLength - (secHandLength / 24));
 
-  //   contextHands.beginPath(); // Get ready to draw
-  //   contextHands.moveTo(clockX, clockY); // Start at the center
-  //   contextHands.lineTo(targetX, targetY); // Draw a line outwards
-  //   contextHands.stroke();
-  // }// End drawNotches()
+      context.moveTo(x1, y1);
+      context.lineTo(x2, y2);
+
+      context.strokeStyle = '#ffffff';
+      context.stroke();
+    }
+  }// End drawNotches()
 
   // Clear the canvas then draw the current arms
-  // Functioning Correctly
   contextHands.clearRect(0, 0, canvas.width, canvas.height);
   contextClock.clearRect(0, 0, canvas.width, canvas.height);
   drawClockFace("#000000", "#ffffff"); // Clock Face
-  drawArm(hour / 12, 6, 0.50, '#ffffff'); // Hour
-  drawArm(minute / 60,  4, 0.75, '#ffffff'); // Minute
-  drawArm(second / 60,  2, 1.00, '#ffffff'); // Second
+  drawArm(hour / 12, 6, 0.50, "#ffffff"); // Hour
+  drawArm(minute / 60,  4, 0.75, "#ffffff"); // Minute
+  drawArm(second / 60,  2, 1.00, "#ffffff"); // Second
+  drawNotches()
 } // end displayTime()
 
 function padZero(num) {
