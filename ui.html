@@ -10,7 +10,10 @@
     <title>MM Interface</title>
   </head>
   <body>
-    
+    <div id="jumbotron" class="jumbotron jumbotron-fluid">
+      <h1>Magic Mirror</h1>
+      <a href="index.html" class="btn btn-warning" role="button">Preview</a>
+    </div>
     <div class="container">
       <!-- The Weather Section -->
       <div class="row">
@@ -28,7 +31,7 @@
               <!-- Enable weather checkbox -->
               <div class="form-check">
                 <label class="form-check-label active">
-                  <input type="checkbox" class="form-check-input" checked="checked">
+                  <input id="enableWeather" type="checkbox" class="form-check-input" checked="checked">
                   Enable Weather
                 </label>
               </div>
@@ -45,16 +48,16 @@
             <form>
               <!-- Digital / Analog -->
               <div id="digitalAnalog" class="form-group">
-                <label for="digitalAnalogVal">Digital Format</label>
+                <label for="digitalAnalogVal">Clock Style</label>
                 <select class="form-control" id="digitalAnalogVal">
                   <option value="analog">Analog</option>
                   <option value="digital">Digital</option>
                 </select>
               </div>
               <!-- 12 hour / Military time -->
-              <div id="militarytime" class="form-group">
+              <div id="militaryTime" class="form-group">
                 <label for="milTimeVal">Digital Format</label>
-                <select class="form-control" id="milTimeVal">
+                <select class="form-control" id="milTimeVal" disabled>
                   <option value="twelveHour">12 Hour</option>
                   <option value="military">Military</option>
                 </select>
@@ -62,7 +65,7 @@
               <!-- Enable Clock checkbox -->
               <div class="form-check">
                 <label class="form-check-label active">
-                  <input type="checkbox" class="form-check-input" checked="checked">
+                  <input id="enableClock" type="checkbox" class="form-check-input" checked="checked">
                   Enable Clock
                 </label>
               </div>
@@ -71,16 +74,29 @@
           </div>
         </div>
       </div>
+      <!-- The Quote Section -->
       <div class="row">
-        
+        <div class="panel panel-default">
+          <div class="panel-heading">Quotes</div>
+          <div class="panel-body">
+            <form>
+              <!-- Enable Quote checkbox -->
+              <div class="form-check">
+                <label class="form-check-label active">
+                  <input id="enableQuote" type="checkbox" class="form-check-input" checked="checked">
+                  Enable Quotes
+                </label>
+              </div>
+              <button id="submitQuote" type="submit" class="btn btn-default">Submit</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
-    
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="assets/js/quote.js"></script>
-    <script src="assets/js/weather.js"></script>
     <script src="assets/js/ui.js"></script>
     
   </body>
