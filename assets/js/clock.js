@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
   startTimer();
 });
 
-
+  var timeFormat = "24Hour";
 
 function displayTime(){
   // Inital Variables
@@ -22,7 +22,11 @@ function displayTime(){
   $("#digitalClock").empty();
   $("#digitalClock").append(dateString);
   $("#digitalClock").append($("<br>"));
-  $("#digitalClock").append(timeString24Hour);
+  if(timeFormat === "12Hour"){
+    $("#digitalClock").append(timeString12Hour);
+  } else {
+    $("#digitalClock").append(timeString24Hour);
+  }
   // Creating the Analog Clock
   var canvas = document.querySelector("#analogClock");
   var context = canvas.getContext('2d');
@@ -190,25 +194,20 @@ function startTimer(){
 } // end startTimer()
 
 function showDigitalClock(){
-  $("#digitalClock").show()
+  $("#digitalClock").show();
+  $("#analogClock").hide();
 } // end showDigitalClock()
 
 function showAnalogClock(){
-  $("#analogClock").show()
+  $("#analogClock").show();
+  $("#digitalClock").hide();
+  timeFormat = "12Hour";
 } // end showAnalogClock()
 
-function hideDigitalClock(){
-  $("#digitalClock").hide()
-} // end hideDigitalClock()
-
-function hideAnalogClock(){
-  $("#analogClock").hide()
-} // end hideAnalogClock()
-
 function show24HourTime(){
-
+  timeFormat = "24Hour";
 } // end show24HoutTime()
 
 function show12HourTime(){
-
+  timeFormat = "12Hour"
 } // end show12HourTime()
