@@ -41,6 +41,10 @@ $(document).ready(function() {
 
     // read and set the quote inputs
     db.ref('quoteOn').set($('#enableQuote').prop('checked'));
+
+    //read and set the color selection
+    console.log($('.color:checked').val());
+    db.ref('color').set($('.color:checked').val());
   })
 
   // When clock style 'digital' is selected, enable the option for 12-hour / military time

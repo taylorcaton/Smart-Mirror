@@ -14,6 +14,16 @@ db.ref().on('value', function(snap) {
     	//show24HourTime();
     }
 
+
+
+})
+
+db.ref('color').on('value', function(snap) {
+    var color = snap.val();
+    $('#weatherPane').css('color', color);
+    $('#clockPane').css('color', color);
+    $('#newsPane').css('color', color);
+    $('#quotePane').css('color', color);
 })
 
 document.addEventListener("DOMContentLoaded", function() {
