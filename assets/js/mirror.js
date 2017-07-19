@@ -1,7 +1,13 @@
 // Make a new API call and re-draw the weather results when the db changes
 db.ref().on('value', function(snap) {
 
-	getWeather(snap.val().location);
+
+	if(snap.val().locationName === "unknown"){
+		unknownWeather();
+	}else{
+		getWeather(snap.val().location);
+	}
+	
 
     if(snap.val().digitalClockStyle === "military"){
     	show24HourTime();
