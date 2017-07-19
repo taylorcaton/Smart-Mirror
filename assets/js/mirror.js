@@ -11,7 +11,7 @@ db.ref().on('value', function(snap) {
 	
 
     if(snap.val().digitalClockStyle === "military"){
-    	show24HourTime();
+    	//show24HourTime();
     }
 
 })
