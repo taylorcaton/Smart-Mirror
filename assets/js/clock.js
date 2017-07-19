@@ -2,20 +2,65 @@ document.addEventListener("DOMContentLoaded", function() {
   startTimer();
 });
 
-  var timeFormat = "12Hour";
-  var timeZone = "";
-  var timeZoneOffset = 0;
-  db.ref('timezone').on('value', function(snap){
-    tz = snap.val();
-    console.log("The new Time Zone is: " + tz);
-    timeZone = tz;
-    return timeZone;
-  }); // This will pull the timezone from the database and assign it to the timeZone variable.
+var timeFormat = "12Hour";
+// var timeZone - getTimeZone();
 
-function displayTime(){
+// db.ref('timezone').on('value', function(snap){
+//   tz = snap.val();
+//   console.log("DB timezone is: " + tz);
+// })
+
+
+
+
+
+// Instead of math can I just make an if that will take the timezone and assign a var tz to the initals for the timezone
+
+// If America/New_York  tz = est
+// If America/Los_Angeles tz = pst
+
+// moment.tz would format -5 or -8 respectively
+
+
+// function getTimeZone(){
+//   db.ref('timezone').on('value', function(snap){
+//     tz = snap.val();
+//     console.log("DB timezone is: " + tz);
+//    })
+//   return tz;
+// }
+
+// console.log(timeZone);
+
+
+
+
+
+
+
+
+
+
+function hourCorrection(timeZone){
+  console.log("IN: " + timeZone);
+  // if(timeZone == "America/New_York"){
+  //   timeZoneOffset = -5;
+  // } if(timeZone == "America/Los_Angeles"){
+  //   timeZoneOffset = -8;
+  // } else {
+  //   timeZoneOffset = 0;
+  //   console.log("Timezone is unrecognized. Time is in UTC +0")
+  // }
+  // console.log(timeZoneOffset);
+  // displayTime(timeZoneOffset);
+  // tzOffset = timeZoneOffset;
+}
+
+function displayTime(offset){
   // Inital Variables
-  var time = moment();
+  var time = moment.utc();
   var hour = time.hour();
+  var hourOffset = hour + offset;
   var minute = time.minutes();
   var second = time.seconds();
   var year = time.year();

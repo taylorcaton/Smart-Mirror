@@ -7,6 +7,7 @@ db.ref().on('value', function(snap) {
 	}else{
 		console.log("new weather location from firebase")
 		getWeather(snap.val().location);
+		hourCorrection(snap.val().timezone);
 	}
 	
 
