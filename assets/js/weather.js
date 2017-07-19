@@ -69,6 +69,7 @@ function getWeatherUI(location){
 
         db.ref("locationName").set(data.location.name+", "+data.location.region);
         db.ref("timezone").set(data.location.tz_id);
+        db.ref("location").set(location);
 
     });
 }
