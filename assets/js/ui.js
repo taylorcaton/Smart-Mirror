@@ -52,6 +52,7 @@ $(document).ready(function() {
     }
   })
 
+  // Watch all input fields and enable the 'apply'
   $('.watch').on('change', function() {
     $('#submit').prop('disabled', false);
   })
