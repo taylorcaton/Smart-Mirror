@@ -2,12 +2,12 @@ document.addEventListener("DOMContentLoaded", function() {
   getNews();
 });
 
-function getNews(){
+function getNews(input){
   apiKey = "98a49a60de5b49b18c698cfd0fce0ba5";
   language = "en";
   country = "us";
-  source = "techcrunch";
-  queryUrl = "https://newsapi.org/v1/articles?source=" + source + "&sortBy=latest&apiKey=" + apiKey;
+  source = input;
+  queryUrl = "https://newsapi.org/v1/articles?source=" + source + "&sortBy=top&apiKey=" + apiKey;
 
   $.ajax({
     url: queryUrl,
@@ -28,23 +28,16 @@ function getNews(){
 
     // // console.log(articlesDate);
     // Loop through each article and print them on screen
-    for(i = 0; i < 3; i ++){
-      console.log(articles[i]);
-      $("#newsPane").append(articles[i].title);
-      $("#newsPane").append($("<br>"));
-      $("#newsPane").append(articles[i].description);
-      $("#newsPane").append($("<hr>"));
-
-    //   var nextArticle = ;
-
-    // } // End for()
-    // Test to see how it looks. Will only show the top result in the quote pane
-
-    
-    // $("#newsPane").append(articles[0].title);
-    // $("#newsPane").append($("<hr>"));
-    // $("#newsPane").append(articles[0].description);
-  }
+      for(i = 0; i < 3; i ++){
+        console.log(articles[i]);
+        $('#newsPane').fadeOut('slow', function() {
+          $("#newsPane").append(articles[i].title);
+          $("#newsPane").append($("<br>"));
+          $("#newsPane").append(articles[i].description);
+          $("#newsPane").append($("<hr>"));
+          $('#newsPane').fadeIn('slow');
+        });
+        }
   }); // End ajax.done()
 
 } // End getNews()

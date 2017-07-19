@@ -1,7 +1,11 @@
 // Make a new API call and re-draw the weather results when the db changes
+
+var dbTimeZone = "";
+var dbNewsSource = "";
+
 db.ref().on('value', function(snap) {
-
-
+	dbTimeZone = snap.val().timezone;
+	dbNewsSource = snap.val().newsSource;
 	if(snap.val().locationName === "unknown"){
 		unknownWeather();
 	}else{
@@ -10,11 +14,12 @@ db.ref().on('value', function(snap) {
 		hourCorrection(snap.val().timezone);
 	}
 	
+	getNews(dbNewsSource);
 
     if(snap.val().digitalClockStyle === "military"){
     	//show24HourTime();
     }
-
+    return [dbTimeZone, dbNewsSource];
 })
 
 document.addEventListener("DOMContentLoaded", function() {

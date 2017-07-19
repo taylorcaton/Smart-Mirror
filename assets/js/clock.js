@@ -3,74 +3,37 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 var timeFormat = "12Hour";
-// var timeZone - getTimeZone();
-
-// db.ref('timezone').on('value', function(snap){
-//   tz = snap.val();
-//   console.log("DB timezone is: " + tz);
-// })
-
-
-
-
-
-// Instead of math can I just make an if that will take the timezone and assign a var tz to the initals for the timezone
-
-// If America/New_York  tz = est
-// If America/Los_Angeles tz = pst
-
-// moment.tz would format -5 or -8 respectively
-
-
-// function getTimeZone(){
-//   db.ref('timezone').on('value', function(snap){
-//     tz = snap.val();
-//     console.log("DB timezone is: " + tz);
-//    })
-//   return tz;
-// }
-
-// console.log(timeZone);
-
-
-
-
-
-
-
-
-
 
 function hourCorrection(timeZone){
-  console.log("IN: " + timeZone);
-  // if(timeZone == "America/New_York"){
-  //   timeZoneOffset = -5;
-  // } if(timeZone == "America/Los_Angeles"){
-  //   timeZoneOffset = -8;
-  // } else {
-  //   timeZoneOffset = 0;
-  //   console.log("Timezone is unrecognized. Time is in UTC +0")
-  // }
-  // console.log(timeZoneOffset);
+  if(timeZone === "America/New_York"){
+    timeZoneOffset = -4;
+  } else if(timeZone === "America/Chicago"){
+    timeZoneOffset = -5;
+  } else if(timeZone == "America/Los_Angeles"){
+    timeZoneOffset = -7;
+  } else {
+    timeZoneOffset = 0;
+    console.log("Timezone is unrecognized. Time is in UTC +0")
+  }
   // displayTime(timeZoneOffset);
-  // tzOffset = timeZoneOffset;
+  return timeZoneOffset
 }
 
 function displayTime(offset){
   // Inital Variables
   var time = moment.utc();
+  var tzOffset = hourCorrection(dbTimeZone);
   var hour = time.hour();
-  var hourOffset = hour + offset;
+  var hourOffset = parseInt(hour) + parseInt(tzOffset);
   var minute = time.minutes();
   var second = time.seconds();
   var year = time.year();
   var month = time.month();
   var day = time.date();
   var dayOfWeek = time.isoWeekday();
-  var timeString12Hour = formatHour(hour) + ":" + padZero(minute) + " " + getTimePeriod(hour);
-  var timeString24Hour = padZero(hour) + ":" + padZero(minute);
+  var timeString12Hour = formatHour(hourOffset) + ":" + padZero(minute) + " " + getTimePeriod(hour);
+  var timeString24Hour = padZero(hourOffset) + ":" + padZero(minute);
   var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + day + ", " + year;
-
 
   // Set Clock on html
   $("#digitalClock").empty();
@@ -84,6 +47,7 @@ function displayTime(offset){
   // Creating the Analog Clock
   var canvas = document.querySelector("#analogClock");
   var context = canvas.getContext('2d');
+  drawClockFace("#000000", "#ffffff"); // Clock Face
   var contextHands = canvas.getContext("2d");
   var contextClock = canvas.getContext("2d");
   var clockRadius = 100;
@@ -91,16 +55,16 @@ function displayTime(offset){
   // Define center of clock
   var clockX = canvas.width / 2;
   var clockY = canvas.height / 2;
+    contextClock.beginPath();
+    contextClock.arc(clockX, clockY, 97, 0 * Math.PI, 2 * Math.PI);
+    contextClock.fillStyle = "#000000";
+    contextClock.fill();
+    contextClock.lineWidth = 3;
+    contextClock.strokeColor = "#ffffff";
+    contextClock.stroke();
 
   // Create clock face
   function drawClockFace(fill, outline){
-    contextClock.beginPath();
-    contextClock.arc(clockX, clockY, 97, 0 * Math.PI, 2 * Math.PI);
-    contextClock.fillStyle = fill;
-    contextClock.fill();
-    contextClock.lineWidth = 3;
-    contextClock.strokeColor = outline;
-    contextClock.stroke();
   }// End drawClockFace()
 
   // Create Hour Hands
@@ -143,7 +107,6 @@ function displayTime(offset){
   // Clear the canvas then draw the current arms
   contextHands.clearRect(0, 0, canvas.width, canvas.height);
   contextClock.clearRect(0, 0, canvas.width, canvas.height);
-  drawClockFace("#000000", "#ffffff"); // Clock Face
   drawArm(hour / 12, 6, 0.50, "#ffffff"); // Hour
   drawArm(minute / 60,  4, 0.75, "#ffffff"); // Minute
   drawArm(second / 60,  2, 1.00, "#ffffff"); // Second
@@ -245,8 +208,11 @@ function formatMonth(monthCheck){
 }// end formatMonth()
 
 function startTimer(){
+
   setInterval(displayTime, 1000);
+  $('#clockPane').fadeout('slow');
   displayTime();
+  $('#clockPane').fadeIn('slow');
 } // end startTimer()
 
 function showDigitalClock(){
@@ -267,7 +233,3 @@ function show24HourTime(){
 function show12HourTime(){
   timeFormat = "12Hour"
 } // end show12HourTime()
-
-function convertTZ(){
-  // not working
-}
