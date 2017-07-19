@@ -42,7 +42,10 @@ function getWeather(location){
     });
 }
 
-function getWeather(location){
+
+
+
+function getWeatherUI(location){
 
     var APIKey = "44750aae265346679f0162443170607";
 
@@ -51,7 +54,7 @@ function getWeather(location){
 
     var queryURL = "https://api.apixu.com/v1/current.json?" +
     "key="+APIKey+"&q="+location;
-    
+
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -59,7 +62,8 @@ function getWeather(location){
     // We store all of the retrieved data inside of an object called "data"
     .done(function(data) {
 
-        data.
+        db.ref("locationName").set(data.location.name+", "+data.location.region);
+        db.ref("timezone").set(data.location.tz_id);
 
     });
 }
