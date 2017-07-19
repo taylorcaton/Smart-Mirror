@@ -23,7 +23,6 @@ function getWeather(location){
 
         // Log the resulting object
         console.log(data);
-        console.log("Temperature (F): " + data.current.temp_f);
 
         temp = data.current.temp_f;
         description = data.current.condition.text;
@@ -57,7 +56,13 @@ function getWeatherUI(location){
 
     $.ajax({
         url: queryURL,
-        method: "GET"
+        method: "GET",
+        statusCode: {
+        400: function() {
+          db.ref("locationName").set("unknown");
+          db.ref("location").set("unknown");
+        }
+      }
     })
     // We store all of the retrieved data inside of an object called "data"
     .done(function(data) {
@@ -66,4 +71,14 @@ function getWeatherUI(location){
         db.ref("timezone").set(data.location.tz_id);
 
     });
+}
+
+function unknownWeather(){
+        var newDiv = $("<div>");
+        var p = $("<p class='text-left'>")
+        p.append("<img src='assets/images/unknown.png' alt='Icon depicting current weather.'>")
+        p.append("<h2>?°F</h2>")
+        p.append("<h4>unknown source</h4>")
+        newDiv.append(p);
+        $("#weatherPane").html(newDiv);
 }

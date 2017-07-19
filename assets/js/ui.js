@@ -24,7 +24,7 @@ $(document).ready(function() {
     if ($('#myLocation').val().trim()) {
       var myLoc = $('#myLocation').val().trim();
       var weatherOn = $('#weatherEnable').val();
-      db.ref('location').set(myLoc);
+      getWeatherUI(myLoc);
       $('#myLocation').val(null);
     }
     db.ref('weatherOn').set($('#enableWeather').prop('checked'));
