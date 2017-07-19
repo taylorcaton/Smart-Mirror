@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var timeFormat = "12Hour";
   var timeZone = "";
-  var timeZoneOffset = 0:
+  var timeZoneOffset = 0;
   db.ref('timezone').on('value', function(snap){
     tz = snap.val();
     console.log("The new Time Zone is: " + tz);
