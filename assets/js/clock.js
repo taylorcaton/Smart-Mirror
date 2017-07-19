@@ -2,11 +2,13 @@ document.addEventListener("DOMContentLoaded", function() {
   startTimer();
 });
 
-  var timeFormat = "24Hour";
+  var timeFormat = "12Hour";
   var timeZone = "";
   db.ref('timezone').on('value', function(snap){
-    timeZone = snap.val();
-    console.log("Time Zone is: " + timeZone);
+    tz = snap.val();
+    console.log("The new Time Zone is: " + tz);
+    timeZone = tz;
+    return timeZone;
   });// this needs to come from the database.
 
 function displayTime(){
@@ -100,6 +102,8 @@ function displayTime(){
   drawArm(minute / 60,  4, 0.75, "#ffffff"); // Minute
   drawArm(second / 60,  2, 1.00, "#ffffff"); // Second
   drawNotches()
+
+  return time;
 } // end displayTime()
 
 function padZero(num) {
@@ -219,5 +223,5 @@ function show12HourTime(){
 } // end show12HourTime()
 
 function convertTZ(){
-  moment.tz("2012-11-04 00:59:59", "America/New_York").format();
+  // not working
 }
