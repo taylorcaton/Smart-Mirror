@@ -39,32 +39,6 @@ $(document).ready(function() {
     db.ref('quoteOn').set($('#enableQuote').prop('checked'));
   })
 
-  // // When the weather button is clicked, read the location and update the DB
-  // $('#submitWeather').on('click', function() {
-  //   event.preventDefault();
-  //   if ($('#myLocation').val().trim()) {
-  //     var myLoc = $('#myLocation').val().trim();
-  //     var clockOn = $('#clockEnable').val();
-  //     db.ref('location').set(myLoc);
-  //     $('#myLocation').val(null);
-  //   }
-  //   db.ref('weatherOn').set($('#enableWeather').prop('checked'));
-  // })
-
-  // // When the Clock submit button is clicked, collect the selections and set them to the DB
-  // $('#submitClock').on('click', function() {
-  //   event.preventDefault();
-  //   db.ref('clockStyle').set($('#digitalAnalogVal').val());
-  //   db.ref('digitalClockStyle').set($('#milTimeVal').val());
-  //   db.ref('clockOn').set($('#enableClock').prop('checked'));
-  // })
-
-  // // When the Quote submit button is clicked, collect the selections and set them to the DB
-  // $('#submitQuote').on('click', function() {
-  //   event.preventDefault();
-  //   db.ref('quoteOn').set($('#enableQuote').prop('checked'));
-  // })
-
   // When clock style 'digital' is selected, enable the option for 12-hour / military time
   $('#digitalAnalogVal').on('change', function() {
     var style = $('#digitalAnalogVal').val();
@@ -75,6 +49,8 @@ $(document).ready(function() {
       $('#milTimeVal').prop('disabled', false);
     }
   })
+
+
 
 //===== Database Listeners ==========================================================
 
