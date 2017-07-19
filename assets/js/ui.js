@@ -1,5 +1,7 @@
 //===== Initialize Page =============================================================
 
+let firstLoad = true;
+
 $(document).ready(function() {
   // Get a snapshot of all the values to apply to the various inputs
   db.ref().once('value', function(snap) {
@@ -12,6 +14,7 @@ $(document).ready(function() {
     if (sv.clockStyle === 'analog') {
       $('#milTimeVal').prop('disabled', 'disabled');
     }
+    $('#newsSourceVal').val(sv.newsSource);
   })
 
 
@@ -51,18 +54,33 @@ $(document).ready(function() {
     }
   })
 
-  $('.watch').on('change', function() {
-    $('#submit').prop('disabled', false);
-  })
+  // Watch all input fields and enable the 'apply' once something changes
+  // $('.watch').on('change', function() {
+  //   $('#submit').prop('disabled', false);
+  // })
+
 
 //===== Database Listeners ==========================================================
 
   // when locationReturned changes, indicate that in the UI
-  db.ref().on('value', function(snap) {
+  db.ref('locationName').on('value', function(snap) {
     var sv = snap.val();
-    console.log(sv.locationName);
+    console.log(sv);
+
     // Update the weather app to display the current location
-    $('#currentLoc').text("Current Location: " + sv.locationName);
+    $('#currentLoc').text("Current Location: " + sv);
+  })
+
+  db.ref('errorID').on('value', function(snap) {
+    if (firstLoad === false) {
+      swal(
+        'Uh-oh!',
+        'That location was not found. Try again',
+        'error'
+      )
+    } else {
+      firstLoad = false;
+    } 
   })
 
 })

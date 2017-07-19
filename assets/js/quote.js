@@ -19,11 +19,15 @@ function getQuote(){
 			console.log(quoteAuthor + quoteText);
 
 
+			$('#quotePane').fadeOut('slow', function() {
+            	$("#quotePane").empty();
+            	$("#quotePane").append($("<hr>"));
+				$("#quotePane").append(quoteText).addClass("text-center").append("<br>");
+				$("#quotePane").append(quoteAuthor).addClass("text-center");
+            	$('#quotePane').fadeIn('slow');
+        	});
 
-			$("#quotePane").empty();
-			$("#quotePane").append(quoteText);
-			$("#quotePane").append($("<hr>"));
-			$("#quotePane").append(quoteAuthor);
+			
 		}
 	});
 }
