@@ -12,6 +12,7 @@ $(document).ready(function() {
     if (sv.clockStyle === 'analog') {
       $('#milTimeVal').prop('disabled', 'disabled');
     }
+    $('#newsSourceVal').val(sv.newsSource);
   })
 
 
