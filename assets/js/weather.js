@@ -65,6 +65,7 @@ function getWeatherUI(location){
         400: function() {
           db.ref("locationName").set("unknown");
           db.ref("location").set("unknown");
+          db.ref("errorID").set(Math.random());
         }
       }
     })
