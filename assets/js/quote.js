@@ -1,5 +1,3 @@
-
-
 function getQuote(){
 	$.ajax({
 		url: "https://api.forismatic.com/api/1.0/?",
