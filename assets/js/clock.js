@@ -3,6 +3,11 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
   var timeFormat = "24Hour";
+  var timeZone = "";
+  db.ref('timezone').on('value', function(snap){
+    timeZone = snap.val();
+    console.log("Time Zone is: " + timeZone);
+  });// this needs to come from the database.
 
 function displayTime(){
   // Inital Variables
@@ -17,9 +22,7 @@ function displayTime(){
   var timeString12Hour = formatHour(hour) + ":" + padZero(minute) + " " + getTimePeriod(hour);
   var timeString24Hour = padZero(hour) + ":" + padZero(minute);
   var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + day + ", " + year;
-  var timeZone = db.ref('timezone');// this needs to come from the database.
 
-  console.log(db);
 
   // Set Clock on html
   $("#digitalClock").empty();
@@ -214,3 +217,7 @@ function show24HourTime(){
 function show12HourTime(){
   timeFormat = "12Hour"
 } // end show12HourTime()
+
+function convertTZ(){
+  moment.tz("2012-11-04 00:59:59", "America/New_York").format();
+}
