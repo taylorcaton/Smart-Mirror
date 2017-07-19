@@ -1,7 +1,3 @@
-document.addEventListener("DOMContentLoaded", function() {
-getQuotes();
-});
-
 function getQuote(){
 	$.ajax({
 		url: "https://api.forismatic.com/api/1.0/?",
@@ -30,9 +26,4 @@ function getQuote(){
 			$("#quotePane").append(quoteAuthor);
 		}
 	});
-}
-
-function getQuotes(){
-	setInterval(getQuote, 60000);
-	getQuote();
 }
