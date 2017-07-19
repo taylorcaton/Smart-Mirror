@@ -1,6 +1,4 @@
-document.addEventListener("DOMContentLoaded", function() {
-getQuotes();
-});
+
 
 function getQuote(){
 	$.ajax({
@@ -30,9 +28,4 @@ function getQuote(){
 			$("#quotePane").append(quoteAuthor);
 		}
 	});
-}
-
-function getQuotes(){
-	setInterval(getQuote, 60000);
-	getQuote();
 }
