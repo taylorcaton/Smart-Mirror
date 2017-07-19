@@ -40,7 +40,10 @@ function getWeather(location){
         row2.append("<div class='col-xs-12'><h2 class='text-center' id='condition'>" + description + "</h2></div>")
         newDiv.append(row2);
 
-        $("#weatherPane").html(newDiv);
+        $('#weatherPane').fadeOut('slow', function() {
+            $('#weatherPane').html(newDiv);
+            $('#weatherPane').fadeIn('slow');
+        });
 
     });
 }
@@ -89,8 +92,12 @@ function unknownWeather(){
         var newDiv = $("<div>");
         var p = $("<p class='text-left'>")
         p.append("<img src='assets/images/unknown.png' alt='Icon depicting current weather.'>")
-        p.append("<h2>?°F</h2>")
-        p.append("<h4>unknown source</h4>")
+        //p.append("<h2>?°F</h2>")
+        //p.append("<h4>unknown source</h4>")
         newDiv.append(p);
-        $("#weatherPane").html(newDiv);
+        
+        $('#weatherPane').fadeOut('slow', function() {
+            $('#weatherPane').html(newDiv);
+            $('#weatherPane').fadeIn('slow');
+        });
 }

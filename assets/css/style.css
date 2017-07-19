@@ -19,6 +19,10 @@ h4 {
 #quotePane {
   position: fixed;
   bottom: 0px;
+
+  font-size: 32px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
 }
 
 #digitalClock {
