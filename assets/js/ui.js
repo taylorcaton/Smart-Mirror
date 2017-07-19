@@ -23,7 +23,7 @@ $(document).ready(function() {
     if ($('#myLocation').val().trim()) {
       var myLoc = $('#myLocation').val().trim();
       var weatherOn = $('#weatherEnable').val();
-      db.ref('location').set(myLoc);
+      getWeatherUI(myLoc);
       $('#myLocation').val(null);
     }
     db.ref('weatherOn').set($('#enableWeather').prop('checked'));
@@ -34,6 +34,7 @@ $(document).ready(function() {
     db.ref('clockOn').set($('#enableClock').prop('checked'));
     
     //read and set the news inputs
+    db.ref('newsSource').set($('#newsSourceVal').val());
 
     // read and set the quote inputs
     db.ref('quoteOn').set($('#enableQuote').prop('checked'));
@@ -50,15 +51,17 @@ $(document).ready(function() {
     }
   })
 
-
+  $('.watch').on('change', function() {
+    $('#submit').prop('disabled', false);
+  })
 
 //===== Database Listeners ==========================================================
 
-  // NEEDS WORK - Should read changes to 'locationReturned'
+  // when locationReturned changes, indicate that in the UI
   db.ref().on('value', function(snap) {
     var sv = snap.val();
     console.log(sv.locationName);
-    // Update the weather ap to display the current location
+    // Update the weather app to display the current location
     $('#currentLoc').text("Current Location: " + sv.locationName);
   })
 
