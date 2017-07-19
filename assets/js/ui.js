@@ -15,6 +15,7 @@ $(document).ready(function() {
       $('#milTimeVal').prop('disabled', 'disabled');
     }
     $('#newsSourceVal').val(sv.newsSource);
+    $("[value='" + sv.color +"']").prop('checked', true);
   })
 
 
