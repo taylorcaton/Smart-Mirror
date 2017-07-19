@@ -17,7 +17,10 @@ function displayTime(){
   var timeString12Hour = formatHour(hour) + ":" + padZero(minute) + " " + getTimePeriod(hour);
   var timeString24Hour = padZero(hour) + ":" + padZero(minute);
   var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + day + ", " + year;
-  var timeZone = // this needs to come from the database.
+  var timeZone = db.ref('timezone');// this needs to come from the database.
+
+  console.log(db);
+
   // Set Clock on html
   $("#digitalClock").empty();
   $("#digitalClock").append(dateString);

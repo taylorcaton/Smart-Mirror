@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function() {
+  getNews();
+});
+
 function getNews(){
   apiKey = "98a49a60de5b49b18c698cfd0fce0ba5";
   language = "en";
