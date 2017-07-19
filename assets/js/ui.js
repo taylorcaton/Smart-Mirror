@@ -17,29 +17,25 @@ $(document).ready(function() {
 
 //===== Event Listeners ==============================================================
 
-  // When the weather button is clicked, read the location and update the DB
-  $('#submitWeather').on('click', function() {
+  $('#submit').on('click', function() {
     event.preventDefault();
+    // read and set weather inputs
     if ($('#myLocation').val().trim()) {
       var myLoc = $('#myLocation').val().trim();
-      var clockOn = $('#clockEnable').val();
+      var weatherOn = $('#weatherEnable').val();
       db.ref('location').set(myLoc);
       $('#myLocation').val(null);
     }
     db.ref('weatherOn').set($('#enableWeather').prop('checked'));
-  })
 
-  // When the Clock submit button is clicked, collect the selections and set them to the DB
-  $('#submitClock').on('click', function() {
-    event.preventDefault();
+    // read and set clock inputs
     db.ref('clockStyle').set($('#digitalAnalogVal').val());
     db.ref('digitalClockStyle').set($('#milTimeVal').val());
     db.ref('clockOn').set($('#enableClock').prop('checked'));
-  })
+    
+    //read and set the news inputs
 
-  // When the Quote submit button is clicked, collect the selections and set them to the DB
-  $('#submitQuote').on('click', function() {
-    event.preventDefault();
+    // read and set the quote inputs
     db.ref('quoteOn').set($('#enableQuote').prop('checked'));
   })
 
@@ -54,14 +50,16 @@ $(document).ready(function() {
     }
   })
 
+
+
 //===== Database Listeners ==========================================================
 
   // NEEDS WORK - Should read changes to 'locationReturned'
   db.ref().on('value', function(snap) {
     var sv = snap.val();
-    console.log(sv.location);
+    console.log(sv.locationName);
     // Update the weather ap to display the current location
-    $('#currentLoc').text("Current Location: " + sv.location);
+    $('#currentLoc').text("Current Location: " + sv.locationName);
   })
 
 })
