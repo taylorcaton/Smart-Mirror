@@ -2,11 +2,10 @@
 font-family: 'Abel', sans-serif;
 font-family: 'Yanone Kaffeesatz', sans-serif;*/
 
-
 body {
   background-color: #000;
   color: #fff;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h2 {
@@ -33,4 +32,16 @@ h4 {
  
 #analogClock {
     padding: 10px;
+}
+
+#temperature {
+  font-size: 124px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  padding: 50px 0px;
+}
+
+#condition {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
 }
