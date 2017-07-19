@@ -4,12 +4,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   var timeFormat = "12Hour";
   var timeZone = "";
+  var timeZoneOffset = 0:
   db.ref('timezone').on('value', function(snap){
     tz = snap.val();
     console.log("The new Time Zone is: " + tz);
     timeZone = tz;
     return timeZone;
-  });// this needs to come from the database.
+  }); // This will pull the timezone from the database and assign it to the timeZone variable.
 
 function displayTime(){
   // Inital Variables
