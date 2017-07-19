@@ -5,6 +5,7 @@ db.ref().on('value', function(snap) {
 	if(snap.val().locationName === "unknown"){
 		unknownWeather();
 	}else{
+		console.log("new weather location from firebase")
 		getWeather(snap.val().location);
 	}
 	

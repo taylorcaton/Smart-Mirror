@@ -67,8 +67,15 @@ function getWeatherUI(location){
     // We store all of the retrieved data inside of an object called "data"
     .done(function(data) {
 
-        db.ref("locationName").set(data.location.name+", "+data.location.region);
-        db.ref("timezone").set(data.location.tz_id);
+        // db.ref("locationName").set(data.location.name+", "+data.location.region);
+        // db.ref("timezone").set(data.location.tz_id);
+        // db.ref("location").set(location);
+
+        var updates = {}
+        updates["locationName"] = data.location.name+", "+data.location.region;
+        updates["location"] = location;
+        updates["timezone"] = data.location.tz_id;
+        db.ref().update(updates)
 
     });
 }
