@@ -9,3 +9,26 @@
 #submit {
   margin-bottom: 15px;
 }
+
+.swatch {
+    height: 20px;
+    width: 20px;
+    border: solid 1px #CCC;
+    border-radius: 3px;
+}
+
+#swatch0 {
+    background-color: #ffffff;
+}
+
+#swatch1 {
+    background-color: #ff00ff;
+}
+
+#swatch2 {
+    background-color: #ffff00;
+}
+
+#swatch3 {
+    background-color: #00ffff;
+}

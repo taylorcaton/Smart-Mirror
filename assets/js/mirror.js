@@ -19,7 +19,17 @@ db.ref().on('value', function(snap) {
     if(snap.val().digitalClockStyle === "military"){
     	//show24HourTime();
     }
+
     return [dbTimeZone, dbNewsSource];
+
+})
+
+db.ref('color').on('value', function(snap) {
+    var color = snap.val();
+    $('#weatherPane').css('color', color);
+    $('#clockPane').css('color', color);
+    $('#newsPane').css('color', color);
+    $('#quotePane').css('color', color);
 })
 
 document.addEventListener("DOMContentLoaded", function() {
