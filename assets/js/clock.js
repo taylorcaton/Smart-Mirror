@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 var timeFormat = "12Hour";
+var timeCorrected = false;
 
 function hourCorrection(timeZone){
   if(timeZone === "America/New_York"){
@@ -19,6 +20,41 @@ function hourCorrection(timeZone){
   return timeZoneOffset
 }
 
+function dayCorrection(hourCheck, dayCheck){
+  hour = hourCheck;
+  day = dayCheck;
+  console.log("hour is: " + hour);
+  console.log("day is: " + day);
+  if(hour <= 0){
+    // console.log("oops the day rolled");
+    day --;
+    hour = 24 + hour;
+    console.log("day was rolled back to " + day);
+    console.log("hour was rolled back to " + hour);
+  } else {
+    console.log("day is still good");
+  }
+  return day;
+}
+
+function dayHourCorrection(hourCheck, dayCheck){
+  hour = hourCheck;
+  day = dayCheck;
+  console.log("hour is: " + hour);
+  console.log("day is: " + day);
+  if(hour <= 0){
+    // console.log("oops the day rolled");
+    day --;
+    hour = 24 + hour;
+    console.log("day was rolled back to " + day);
+    console.log("hour was rolled back to " + hour);
+  } else {
+    console.log("day is still good");
+  }
+  return hour;
+}
+
+
 function displayTime(offset){
   // Inital Variables
   var time = moment.utc();
@@ -31,9 +67,16 @@ function displayTime(offset){
   var month = time.month();
   var day = time.date();
   var dayOfWeek = time.isoWeekday();
-  var timeString12Hour = formatHour(hourOffset) + ":" + padZero(minute) + " " + getTimePeriod(hour);
-  var timeString24Hour = padZero(hourOffset) + ":" + padZero(minute);
-  var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + day + ", " + year;
+  var dayOffset = dayCorrection(hourOffset, day);
+  var dayHourOffset = dayHourCorrection(hourOffset, day);
+// Create seperate functions
+  var checkedDay = /[^,]*/.exec(dayOffset)[0];
+  var checkedDayHour = /[^,]*/.exec(dayHourOffset)[0];
+// 
+  console.log("Checked Hour " + checkedDayHour +", Checked Day " + checkedDay);
+  var timeString12Hour = formatHour(checkedDayHour) + ":" + padZero(minute) + " " + getTimePeriod(checkedDayHour);
+  var timeString24Hour = padZero(checkedDayHour) + ":" + padZero(minute);
+  var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + checkedDay + ", " + year;
 
   // Set Clock on html
   $("#digitalClock").empty();

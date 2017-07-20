@@ -30,13 +30,11 @@ function getNews(input){
     // Loop through each article and print them on screen
       for(i = 0; i < 3; i ++){
         console.log(articles[i]);
-        $('#newsPane').fadeOut('slow', function() {
           $("#newsPane").append(articles[i].title);
           $("#newsPane").append($("<br>"));
           $("#newsPane").append(articles[i].description);
           $("#newsPane").append($("<hr>"));
           $('#newsPane').fadeIn('slow');
-        });
         }
   }); // End ajax.done()
 
