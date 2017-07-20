@@ -10,7 +10,10 @@ function hourCorrection(timeZone){
     timeZoneOffset = -4;
   } else if(timeZone === "America/Chicago"){
     timeZoneOffset = -5;
-  } else if(timeZone == "America/Los_Angeles"){
+  } else if(timeZone === "America/Denver"){
+    timeZoneOffset = -6;
+  }
+  else if(timeZone == "America/Los_Angeles"){
     timeZoneOffset = -7;
   } else {
     timeZoneOffset = 0;
@@ -23,16 +26,12 @@ function hourCorrection(timeZone){
 function dayCorrection(hourCheck, dayCheck){
   hour = hourCheck;
   day = dayCheck;
-  console.log("hour is: " + hour);
-  console.log("day is: " + day);
   if(hour <= 0){
     // console.log("oops the day rolled");
     day --;
     hour = 24 + hour;
-    console.log("day was rolled back to " + day);
-    console.log("hour was rolled back to " + hour);
   } else {
-    console.log("day is still good");
+    return day;
   }
   return day;
 }
@@ -40,16 +39,12 @@ function dayCorrection(hourCheck, dayCheck){
 function dayHourCorrection(hourCheck, dayCheck){
   hour = hourCheck;
   day = dayCheck;
-  console.log("hour is: " + hour);
-  console.log("day is: " + day);
   if(hour <= 0){
     // console.log("oops the day rolled");
     day --;
     hour = 24 + hour;
-    console.log("day was rolled back to " + day);
-    console.log("hour was rolled back to " + hour);
   } else {
-    console.log("day is still good");
+    return hour;
   }
   return hour;
 }
@@ -69,11 +64,8 @@ function displayTime(offset){
   var dayOfWeek = time.isoWeekday();
   var dayOffset = dayCorrection(hourOffset, day);
   var dayHourOffset = dayHourCorrection(hourOffset, day);
-// Create seperate functions
   var checkedDay = /[^,]*/.exec(dayOffset)[0];
   var checkedDayHour = /[^,]*/.exec(dayHourOffset)[0];
-// 
-  console.log("Checked Hour " + checkedDayHour +", Checked Day " + checkedDay);
   var timeString12Hour = formatHour(checkedDayHour) + ":" + padZero(minute) + " " + getTimePeriod(checkedDayHour);
   var timeString24Hour = padZero(checkedDayHour) + ":" + padZero(minute);
   var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + checkedDay + ", " + year;
