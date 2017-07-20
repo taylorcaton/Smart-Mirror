@@ -1,6 +1,8 @@
 //===== Initialize Page =============================================================
 
-let firstLoad = true;
+let firstLoadSuccess = true;
+let firstLoadError = true;
+let myColor = "";
 
 $(document).ready(function() {
   // Get a snapshot of all the values to apply to the various inputs
@@ -23,7 +25,6 @@ $(document).ready(function() {
     $("[value='" + sv.color +"']").prop('checked', true);
   })
 
-
 //===== Event Listeners ==============================================================
 
   $('#submit').on('click', function() {
@@ -32,7 +33,6 @@ $(document).ready(function() {
     // read and set weather inputs
     if ($('#myLocation').val().trim()) {
       var myLoc = $('#myLocation').val().trim();
-      var weatherOn = $('#weatherEnable').val();
       getWeatherUI(myLoc);
       $('#myLocation').val(null);
     }
@@ -70,36 +70,60 @@ $(document).ready(function() {
     $('#submit').addClass('unsaved');
   })
 
-
 //===== Database Listeners ==========================================================
 
-  // when locationReturned changes, indicate that in the UI
+  // when locationName changes, indicate that in the UI
   db.ref('locationName').on('value', function(snap) {
     var sv = snap.val();
     console.log(sv);
-    if (sv !== 'unknown' && firstload === false) {
+    if (sv !== 'unknown' && firstLoadSuccess === false) {
       swal(
         'Success',
         'Your changes have been applied',
         'success'
       )
+      firstLoadSuccess = false;
+
     }
     // Update the weather app to display the current location
     $('#currentLoc').text("Current Location: " + sv);
+
   })
 
   db.ref('errorID').on('value', function(snap) {
-    if (firstLoad === false) {
+    if (firstLoadError === false) {
       swal(
         'Uh-oh!',
         'That location was not found. Try again',
         'error'
       )
     } else {
-      firstLoad = false;
+      firstLoadError = false;
     } 
+
   })
 
 //======= Color Picker ===============================================================
+
+  $(".basic").spectrum({
+    preferredFormat: "hex",
+    change: function(color) {
+        //$("#basic-log").text("change called: " + color.toHexString());
+        myColor = color.toHexString();
+        
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
 
 })
