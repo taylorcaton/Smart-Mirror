@@ -6,15 +6,20 @@ $(document).ready(function() {
   // Get a snapshot of all the values to apply to the various inputs
   db.ref().once('value', function(snap) {
     var sv = snap.val();
+    // weather
     $('#enableWeather').prop('checked', sv.weatherOn);
+    // clock
     $('#enableClock').prop('checked', sv.clockOn);
-    $('#enableQuote').prop('checked', sv.quoteOn);
     $('#digitalAnalogVal').val(sv.clockStyle);
     $('#milTimeVal').val(sv.digitalClockStyle);
     if (sv.clockStyle === 'analog') {
       $('#milTimeVal').prop('disabled', 'disabled');
-    }
+    }    
+    // quote   
+    $('#enableQuote').prop('checked', sv.quoteOn);
+    // news
     $('#newsSourceVal').val(sv.newsSource);
+    // colors
     $("[value='" + sv.color +"']").prop('checked', true);
   })
 
@@ -23,6 +28,7 @@ $(document).ready(function() {
 
   $('#submit').on('click', function() {
     event.preventDefault();
+    $('#submit').removeClass('unsaved');
     // read and set weather inputs
     if ($('#myLocation').val().trim()) {
       var myLoc = $('#myLocation').val().trim();
@@ -59,10 +65,10 @@ $(document).ready(function() {
     }
   })
 
-  // Watch all input fields and enable the 'apply' once something changes
-  // $('.watch').on('change', function() {
-  //   $('#submit').prop('disabled', false);
-  // })
+  // Watch all input fields and highlight the 'apply' once something changes
+  $('.watch').on('change', function() {
+    $('#submit').addClass('unsaved');
+  })
 
 
 //===== Database Listeners ==========================================================
@@ -71,7 +77,13 @@ $(document).ready(function() {
   db.ref('locationName').on('value', function(snap) {
     var sv = snap.val();
     console.log(sv);
-
+    if (sv !== 'unknown' && firstload === false) {
+      swal(
+        'Success',
+        'Your changes have been applied',
+        'success'
+      )
+    }
     // Update the weather app to display the current location
     $('#currentLoc').text("Current Location: " + sv);
   })
@@ -87,5 +99,7 @@ $(document).ready(function() {
       firstLoad = false;
     } 
   })
+
+//======= Color Picker ===============================================================
 
 })
