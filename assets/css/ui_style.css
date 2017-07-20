@@ -8,6 +8,7 @@
 
 #submit {
   margin-bottom: 15px;
+  background-color: #539ad1;
 }
 
 .swatch {
@@ -17,12 +18,13 @@
     border-radius: 3px;
 }
 
-.unsaved {
-  box-shadow: 0px 0px 15px cyan;
+#submit.unsaved {
+  box-shadow: 0px 0px 25px orange;
+  background-color: #337AB7;
 }
 
-#colorPicker {
-  border-color: #CCC;
+#swatchC {
+    float: right;
 }
 
 #swatch0 {

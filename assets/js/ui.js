@@ -23,6 +23,9 @@ $(document).ready(function() {
     $('#newsSourceVal').val(sv.newsSource);
     // colors
     $("[value='" + sv.color +"']").prop('checked', true);
+    $('#colorPicker').val(sv.color);
+    myColor = sv.color;
+    $('#swatchC').css('background-color', sv.color);
   })
 
 //===== Event Listeners ==============================================================
@@ -50,8 +53,13 @@ $(document).ready(function() {
     db.ref('quoteOn').set($('#enableQuote').prop('checked'));
 
     //read and set the color selection
-    console.log($('.color:checked').val());
-    db.ref('color').set($('.color:checked').val());
+    if (myColor === "") {
+      db.ref('color').set($('.color:checked').val());
+    } else {
+      db.ref('color').set(myColor);
+    }
+    
+    
   })
 
   // When clock style 'digital' is selected, enable the option for 12-hour / military time
@@ -63,6 +71,11 @@ $(document).ready(function() {
     else if (style === 'digital') {
       $('#milTimeVal').prop('disabled', false);
     }
+  })
+
+  // When a color radio button is clicked, clear 'myColor'
+  $('.color').on('click', function() {
+    myColor = "";
   })
 
   // Watch all input fields and highlight the 'apply' once something changes
@@ -79,17 +92,18 @@ $(document).ready(function() {
     if (sv !== 'unknown' && firstLoadSuccess === false) {
       swal(
         'Success',
-        'Your changes have been applied',
+        'Your location has been updated to ' + sv,
         'success'
       )
-      firstLoadSuccess = false;
-
     }
+    firstLoadSuccess = false;
+
     // Update the weather app to display the current location
     $('#currentLoc').text("Current Location: " + sv);
 
   })
 
+  // If the location API request returns an error, handle it and alert the user
   db.ref('errorID').on('value', function(snap) {
     if (firstLoadError === false) {
       swal(
@@ -107,10 +121,13 @@ $(document).ready(function() {
 
   $(".basic").spectrum({
     preferredFormat: "hex",
+    color: myColor,
     change: function(color) {
         //$("#basic-log").text("change called: " + color.toHexString());
         myColor = color.toHexString();
-        
+        $('.color').each(function() {
+          $(this).prop('checked', false);
+        })
     }
   });
 
