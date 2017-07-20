@@ -30,9 +30,9 @@ function getNews(input){
     // Loop through each article and print them on screen
       for(i = 0; i < 3; i ++){
         console.log(articles[i]);
-          $("#newsPane").append(articles[i].title);
+          $("#newsPane").append("<div id='newsTitle'><i class='fa fa-newspaper-o' aria-hidden='true'></i> "+articles[i].title+"</div>");
           $("#newsPane").append($("<br>"));
-          $("#newsPane").append(articles[i].description);
+          $("#newsPane").append("<div id='newsDescription'>"+articles[i].description+"</div>");
           $("#newsPane").append($("<hr>"));
           $('#newsPane').fadeIn('slow');
         }
