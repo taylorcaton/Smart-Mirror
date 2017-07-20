@@ -245,7 +245,7 @@ function formatMonth(monthCheck){
 function startTimer(){
 
   setInterval(displayTime, 1000);
-  $('#clockPane').fadeout('slow');
+  $('#clockPane').fadeOut('slow');
   displayTime();
   $('#clockPane').fadeIn('slow');
 } // end startTimer()

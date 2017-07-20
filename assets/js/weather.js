@@ -22,18 +22,22 @@ function getWeather(location){
         // Log the resulting object
         console.log(data);
 
-        temp = data.current.temp_f;
+        temp = ""+data.current.temp_f;
         description = data.current.condition.text;
         icon = data.current.condition.icon;
 
-        icon = icon.substring(icon.indexOf(".png")-3, icon.indexOf(".png"));
+        if(temp.indexOf(".") > -1){
+            temp = temp.substring(0, temp.indexOf(".")); //Remove everthing after the decimal
+        }
+        
+        icon = icon.substring(icon.indexOf(".png")-3, icon.indexOf(".png")); //grab the icon prefix
         
         var newDiv = $("<div>");
         var row = $("<div class='row text-left'>");
         var row2 = $("<div class='row text-left'>");
 
         row.append("<div class='col-xs-6'><img src='assets/images/"+icon+".png' alt='Icon depicting current weather.'></div>")
-        row.append("<div class='col-xs-6'><h1 id='temperature'>" + temp + "°F</h1></div>")
+        row.append("<div class='col-xs-6'><div id='temperature'>" + temp + "<sup style='font-size:32px; top: -1.5em;'>°F</sup></div></div>")
 
         newDiv.append(row);
 

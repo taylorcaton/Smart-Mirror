@@ -29,6 +29,14 @@ h4 {
   font-weight: 300;
 }
 
+#quoteAuthor {
+  font-size: 24px;
+}
+
+#quoteText {
+  margin: 15px;
+}
+
 #digitalClock {
     display: block;
     font-weight: bold;
@@ -43,13 +51,26 @@ h4 {
 }
 
 #temperature {
-  font-size: 124px;
+  font-size: 100px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  padding: 50px 0px;
 }
 
 #condition {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+}
+
+#weatherPane img{
+  width: 100%;
+}
+
+#newsTitle{
+  font-weight: 600;
+}
+
+#newsDescription{
+  font-size: smaller;
+  font-weight: 300;
+  margin-top: -15px;
 }

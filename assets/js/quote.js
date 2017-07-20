@@ -22,8 +22,8 @@ function getQuote(){
 			$('#quotePane').fadeOut('slow', function() {
             	$("#quotePane").empty();
             	$("#quotePane").append($("<hr>"));
-				$("#quotePane").append(quoteText).addClass("text-center").append("<br>");
-				$("#quotePane").append(quoteAuthor).addClass("text-center");
+				$("#quotePane").append("<div id='quoteText'>&#8220;"+quoteText+"&#8221;</div>").addClass("text-center");
+				$("#quotePane").append("<div class='text-right' id='quoteAuthor'>"+quoteAuthor+"</div>");
             	$('#quotePane').fadeIn('slow');
         	});
 
