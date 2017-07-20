@@ -54,9 +54,12 @@ $(document).ready(function() {
 
     //read and set the color selection
     if (myColor === "") {
-      db.ref('color').set($('.color:checked').val());
+      var c = $('.color:checked').val();
+      db.ref('color').set(c);
+      $('#swatchC').css('background-color', c);
     } else {
       db.ref('color').set(myColor);
+      $('#swatchC').css('background-color', myColor);
     }
     
     
