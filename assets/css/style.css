@@ -62,6 +62,7 @@ h4 {
 #condition {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
+  transition: color 7s;
 }
 
 #weatherPane img{

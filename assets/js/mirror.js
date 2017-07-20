@@ -33,6 +33,7 @@ db.ref('color').on('value', function(snap) {
         $('#clockPane').css('color', color);
         $('#newsPane').css('color', color);
         $('#quotePane').css('color', color);
+        $('#condition').css('color', color);
         window.clearInterval();
     }
 })
@@ -61,6 +62,7 @@ function rainbow() {
         $('#clockPane').css('color', colors[i]);
         $('#newsPane').css('color', colors[i]);
         $('#quotePane').css('color', colors[i]);
+        $('#condition').css('color', colors[i]);
         i++;
         if (i === colors.length){
             i=0;

@@ -21,11 +21,16 @@ $(document).ready(function() {
     $('#enableQuote').prop('checked', sv.quoteOn);
     // news
     $('#newsSourceVal').val(sv.newsSource);
+    $('#enableNews').prop('checked', sv.newsOn);
     // colors
     $("[value='" + sv.color +"']").prop('checked', true);
     $('#colorPicker').val(sv.color);
     myColor = sv.color;
-    $('#swatchC').css('background-color', sv.color);
+    if (sv.color === 'rainbow') {
+      $('#swatchC').css('background-image', 'url("assets/images/rainbow.jpg');
+    } else {
+      $('#swatchC').css('background-color', sv.color);
+    }
   })
 
 //===== Event Listeners ==============================================================
@@ -48,6 +53,7 @@ $(document).ready(function() {
     
     //read and set the news inputs
     db.ref('newsSource').set($('#newsSourceVal').val());
+    db.ref('newsOn').set($('#enableNews').prop('checked'));
 
     // read and set the quote inputs
     db.ref('quoteOn').set($('#enableQuote').prop('checked'));
@@ -58,7 +64,8 @@ $(document).ready(function() {
       $('#swatchC').css('background-image', 'none');
       $('#swatchC').css('background-color', myColor);
     } else if ($('#color4').is(':checked')) {
-       $('#swatchC').css('background-image', 'url("assets/images/rainbow.jpg")')
+      db.ref('color').set("rainbow");
+      $('#swatchC').css('background-image', 'url("assets/images/rainbow.jpg")')
     } else {
       var c = $('.color:checked').val();
       db.ref('color').set(c);
