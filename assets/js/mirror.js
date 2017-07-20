@@ -26,10 +26,15 @@ db.ref().on('value', function(snap) {
 
 db.ref('color').on('value', function(snap) {
     var color = snap.val();
-    $('#weatherPane').css('color', color);
-    $('#clockPane').css('color', color);
-    $('#newsPane').css('color', color);
-    $('#quotePane').css('color', color);
+    if (color === "rainbow") {
+        rainbow();
+    } else {
+        $('#weatherPane').css('color', color);
+        $('#clockPane').css('color', color);
+        $('#newsPane').css('color', color);
+        $('#quotePane').css('color', color);
+        window.clearInterval();
+    }
 })
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -41,4 +46,24 @@ document.addEventListener("DOMContentLoaded", function() {
 function getQuotes(){
 	setInterval(getQuote, 60000);
 	getQuote();
+}
+
+// Cycle text colors through the RGB color wheel
+function rainbow() {
+    var colors = ["rgb(255,0,0)", "rgb(255,127,0)", "rgb(255,255,0)", "rgb(127,255,0)", 
+        "rgb(0,255,0)", "rgb(0,255,127)", "rgb(0,255,255)", "rgb(0,127,255)",
+        "rgb(0,0,255)", "rgb(127,0,255)", "rgb(255,0,255)", "rgb(255,0,127)"];
+
+    var i = 1;
+
+    window.setInterval( function() {
+        $('#weatherPane').css('color', colors[i]);
+        $('#clockPane').css('color', colors[i]);
+        $('#newsPane').css('color', colors[i]);
+        $('#quotePane').css('color', colors[i]);
+        i++;
+        if (i === colors.length){
+            i=0;
+        }
+    }, 5000);    
 }

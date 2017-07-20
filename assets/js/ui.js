@@ -53,13 +53,17 @@ $(document).ready(function() {
     db.ref('quoteOn').set($('#enableQuote').prop('checked'));
 
     //read and set the color selection
-    if (myColor === "") {
+    if (myColor !== "") {
+      db.ref('color').set(myColor);
+      $('#swatchC').css('background-image', 'none');
+      $('#swatchC').css('background-color', myColor);
+    } else if ($('#color4').is(':checked')) {
+       $('#swatchC').css('background-image', 'url("assets/images/rainbow.jpg")')
+    } else {
       var c = $('.color:checked').val();
       db.ref('color').set(c);
+      $('#swatchC').css('background-image', 'none');
       $('#swatchC').css('background-color', c);
-    } else {
-      db.ref('color').set(myColor);
-      $('#swatchC').css('background-color', myColor);
     }
     
     

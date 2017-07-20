@@ -42,3 +42,7 @@
 #swatch3 {
     background-color: #00ffff;
 }
+
+#swatch4 {
+    background-image: url('../images/rainbow.jpg');
+}
