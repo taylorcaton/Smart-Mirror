@@ -21,13 +21,13 @@ function getQuote(){
 
 
 
-			$('#quotePane').fadeOut(30000, function() {
+			$('#quotePane').fadeOut(15000, function() {
             	$("#quotePane").empty();
-            	// setTimeout( function() {
+            	setTimeout( function() {
 					$("#quotePane").append("<div id='quoteText'>&#8220;"+quoteText+"&#8221;</div>").addClass("text-center");
 					$("#quotePane").append("<div class='text-right' id='quoteAuthor'>"+quoteAuthor+"</div>");
-	            	$('#quotePane').fadeIn(30000);
-	            // }, 50000);
+	            	$('#quotePane').fadeIn(15000);
+	            }, 30000);
         	});
 
 			
