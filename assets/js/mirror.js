@@ -2,6 +2,7 @@
 
 var dbTimeZone = "";
 var dbNewsSource = "";
+var rainbowInterval;
 
 db.ref().on('value', function(snap) {
 	dbTimeZone = snap.val().timezone;
@@ -13,7 +14,7 @@ db.ref().on('value', function(snap) {
 		getWeather(snap.val().location);
 		hourCorrection(snap.val().timezone);
 	}
-	
+	clearInterval(newsInterval);
 	getNews(dbNewsSource);
 
     if(snap.val().digitalClockStyle === "military"){
@@ -29,13 +30,14 @@ db.ref('color').on('value', function(snap) {
     if (color === "rainbow") {
         rainbow();
     } else {
+        clearInterval(rainbowInterval);
         $('#weatherPane').css('color', color);
         $('#clockPane').css('color', color);
         $('#newsPane').css('color', color);
         $('#quotePane').css('color', color);
         $('#condition').css('color', color);
         $('#hiLo').css('color', color);
-        window.clearInterval();
+        
     }
 })
 
@@ -58,7 +60,7 @@ function rainbow() {
 
     var i = 1;
 
-    window.setInterval( function() {
+    rainbowInterval = setInterval( function() {
         $('#weatherPane').css('color', colors[i]);
         $('#clockPane').css('color', colors[i]);
         $('#newsPane').css('color', colors[i]);

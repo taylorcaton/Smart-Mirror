@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-  
-  clearInterval(newsInterval);
   getNews();
 });
 
@@ -11,7 +9,6 @@ function displayNews(articles) {
   drawNews(articles[i]);
   i++
   newsInterval = setInterval(function() {
-    console.log(i);
     $('#newsPane').fadeOut('slow');
     setTimeout(function(){
       if (i === articles.length) { i = 0 };
