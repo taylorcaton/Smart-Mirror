@@ -73,11 +73,12 @@ function displayTime(offset){
   // Set Clock on html
   $("#digitalClock").empty();
   $("#digitalClock").append(dateString);
-  $("#digitalClock").append($("<br>"));
+  $("#digitalClock").prepend($("<br>"));
+  var digital = $('<div>').attr('id', 'digitalTime');
   if(timeFormat === "12Hour"){
-    $("#digitalClock").append(timeString12Hour);
+    $("#digitalClock").prepend(digital.text(timeString12Hour));
   } else {
-    $("#digitalClock").append(timeString24Hour);
+    $("#digitalClock").prepend(timeString24Hour);
   }
   // Creating the Analog Clock
   var canvas = document.querySelector("#analogClock");

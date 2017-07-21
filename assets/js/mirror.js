@@ -49,6 +49,14 @@ db.ref('digitalClockStyle').on('value', function(snap) {
     }
 })
 
+db.ref('clockStyle').on('value', function(snap) {
+    if (snap.val() === 'analog') {
+        showAnalogClock()
+    } else if (snap.val() === 'digital') {
+        showDigitalClock()
+    }
+})
+
 db.ref('color').on('value', function(snap) {
     var color = snap.val();
     if (color === "rainbow") {

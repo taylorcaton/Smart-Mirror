@@ -46,6 +46,11 @@ h4 {
     border:1px solid #000000;
     transition: color 7s;
 }
+
+#digitalTime {
+  font-size: 46px;
+  font-family: 'Open Sans', sans-serif;
+}
  
 #analogClock {
     padding: 10px;
