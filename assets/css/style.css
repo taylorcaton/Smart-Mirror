@@ -54,16 +54,26 @@ h4 {
 }
 
 #temperature {
-  font-size: 100px;
+  font-size: 47px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   transition: color 7s;
+  line-height: 23px;
+  margin-top: 47px;
 }
 
 #condition {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   transition: color 7s;
+  font-size: 23px;
+}
+
+#hiLo {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  transition: color 7s;
+  font-size: 23px;
 }
 
 #weatherPane img{
