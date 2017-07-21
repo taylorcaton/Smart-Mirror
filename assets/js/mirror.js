@@ -2,6 +2,7 @@
 
 var dbTimeZone = "";
 var dbNewsSource = "";
+var dbTime = "";
 
 db.ref().on('value', function(snap) {
 	dbTimeZone = snap.val().timezone;

@@ -4,6 +4,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 var timeFormat = "12Hour";
 var timeCorrected = false;
+var dbTime = "";
+
+function getTime(input){
+  var localTime = moment();
+  var h = localTime.hour();
+  var m = localTime.minutes();
+  var s = localTime.seconds()
+  var dow = localTime.isoWeekday();
+  var timeString = formatHour(h) + ":" + padZero(m) + " " + getTimePeriod(h);
+  console.log(timeString);
+}
 
 function hourCorrection(timeZone){
   if(timeZone === "America/New_York"){
@@ -13,7 +24,7 @@ function hourCorrection(timeZone){
   } else if(timeZone === "America/Denver"){
     timeZoneOffset = -6;
   }
-  else if(timeZone == "America/Los_Angeles"){
+  else if(timeZone === "America/Los_Angeles"){
     timeZoneOffset = -7;
   } else {
     timeZoneOffset = 0;
