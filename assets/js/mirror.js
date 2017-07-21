@@ -2,27 +2,38 @@
 
 var dbTimeZone = "";
 var dbNewsSource = "";
-var dbTime = "";
+var rainbowInterval;
 
-db.ref().on('value', function(snap) {
-	dbTimeZone = snap.val().timezone;
-	dbNewsSource = snap.val().newsSource;
-	if(snap.val().locationName === "unknown"){
-		unknownWeather();
-	}else{
-		console.log("new weather location from firebase")
-		getWeather(snap.val().location);
-		hourCorrection(snap.val().timezone);
-	}
-	
-	getNews(dbNewsSource);
+db.ref('newsSource').on('value', function(snap) {
+    clearInterval(newsInterval)
+    getNews(snap.val());
+})
 
-    if(snap.val().digitalClockStyle === "military"){
-    	//show24HourTime();
+db.ref('timezone').on('value', function(snap) {
+    hourCorrection(snap.val());
+})
+
+db.ref('location').on('value', function(snap) {
+    if(snap.val().locationName === "unknown"){
+        unknownWeather();
+    }else{
+        console.log("new weather location from firebase")
+        getWeather(snap.val());
     }
+})
 
-    return [dbTimeZone, dbNewsSource];
+db.ref('digitalClockStyle').on('value', function(snap) {
+    if(snap.val() === 'military') {
+        //show24HourTime();
+    }
+})
 
+db.ref('clockStyle').on('value', function(snap) {
+    if (snap.val() === 'analog') {
+        showAnalogClock()
+    } else if (snap.val() === 'digital') {
+        showDigitalClock()
+    }
 })
 
 db.ref('color').on('value', function(snap) {
@@ -30,12 +41,15 @@ db.ref('color').on('value', function(snap) {
     if (color === "rainbow") {
         rainbow();
     } else {
-        $('#weatherPane').css('color', color);
-        $('#clockPane').css('color', color);
-        $('#newsPane').css('color', color);
-        $('#quotePane').css('color', color);
-        $('#condition').css('color', color);
-        window.clearInterval();
+        changeColor(color);
+        // clearInterval(rainbowInterval);
+        // $('#weatherPane').css('color', color);
+        // $('#clockPane').css('color', color);
+        // $('#newsPane').css('color', color);
+        // $('#quotePane').css('color', color);
+        // $('#condition').css('color', color);
+        // $('#hiLo').css('color', color);
+        
     }
 })
 
@@ -54,19 +68,30 @@ function getQuotes(){
 function rainbow() {
     var colors = ["rgb(255,0,0)", "rgb(255,127,0)", "rgb(255,255,0)", "rgb(127,255,0)", 
         "rgb(0,255,0)", "rgb(0,255,127)", "rgb(0,255,255)", "rgb(0,127,255)",
-        "rgb(0,0,255)", "rgb(127,0,255)", "rgb(255,0,255)", "rgb(255,0,127)"];
+         "rgb(127,0,255)", "rgb(255,0,255)", "rgb(255,0,127)"];
 
     var i = 1;
 
-    window.setInterval( function() {
+    rainbowInterval = setInterval( function() {
         $('#weatherPane').css('color', colors[i]);
         $('#clockPane').css('color', colors[i]);
         $('#newsPane').css('color', colors[i]);
         $('#quotePane').css('color', colors[i]);
         $('#condition').css('color', colors[i]);
+        $('#hiLo').css('color', colors[i]);
         i++;
         if (i === colors.length){
             i=0;
         }
     }, 5000);    
+}
+
+function changeColor(color) {
+    clearInterval(rainbowInterval);
+    $('#weatherPane').css('color', color);
+    $('#clockPane').css('color', color);
+    $('#newsPane').css('color', color);
+    $('#quotePane').css('color', color);
+    $('#condition').css('color', color);
+    $('#hiLo').css('color', color);    
 }

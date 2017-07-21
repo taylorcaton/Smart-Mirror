@@ -1,3 +1,4 @@
+
 function getQuote(){
 	$.ajax({
 		url: "https://api.forismatic.com/api/1.0/?",
@@ -19,11 +20,14 @@ function getQuote(){
 			console.log(quoteAuthor + quoteText);
 
 
-			$('#quotePane').fadeOut('slow', function() {
+
+			$('#quotePane').fadeOut(15000, function() {
             	$("#quotePane").empty();
-				$("#quotePane").append("<div id='quoteText'>&#8220;"+quoteText+"&#8221;</div>").addClass("text-center");
-				$("#quotePane").append("<div class='text-right' id='quoteAuthor'>"+quoteAuthor+"</div>");
-            	$('#quotePane').fadeIn('slow');
+            	setTimeout( function() {
+					$("#quotePane").append("<div id='quoteText'>&#8220;"+quoteText+"&#8221;</div>").addClass("text-center");
+					$("#quotePane").append("<div class='text-right' id='quoteAuthor'>"+quoteAuthor+"</div>");
+	            	$('#quotePane').fadeIn(15000);
+	            }, 30000);
         	});
 
 			

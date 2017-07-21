@@ -10,7 +10,7 @@ body {
 }
 
 h2 {
-  color: #fff;
+
 }
 
 h4 {
@@ -22,13 +22,11 @@ h4 {
 }
 
 #quotePane {
-  position: fixed;
-  bottom: 0px;
-
-  font-size: 32px;
+  font-size: 36px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   transition: color 7s;
+  margin-top: 550px;
 }
 
 #quoteAuthor {
@@ -37,20 +35,28 @@ h4 {
 
 #quoteText {
   margin: 15px;
+  text-align: center;
 }
 
 #digitalClock {
-    display: block;
-    font-weight: bold;
-    text-align: center;
-    width: 200px;
-    padding: 10px;
-    border:1px solid #000000;
-    transition: color 7s;
+  display: block;
+  text-align: right;
+  width: 400px;
+  font-family: 'Open Sans', sans-serif;
+  transition: color 7s;
+  font-size: 20px;
+  font-weight: 150;
+  padding-top: 40px;
+}
+
+#digitalTime {
+  font-size: 58px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
 }
  
 #analogClock {
-    padding: 10px;
+  padding: 10px;
 }
 
 #temperature {
@@ -74,26 +80,32 @@ h4 {
   font-weight: 300;
   transition: color 7s;
   font-size: 23px;
-  margin-top: -7px;
+  margin-top: -38px;
+  margin-left: -14px;
 }
 
 #weatherPane img{
   width: 100%;
   transition: color 7s;
+  margin-top: 21px;
 }
 
 #newsPane{
-  padding-left: 115px;
+  font-family: 'Open Sans', sans-serif;
+  padding: 0px 100px 0px 100px;
+  position: fixed;
+  bottom: 0px;
 }
 
 #newsTitle{
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 32px;
+  font-weight: 300;
   transition: color 7s;
+  margin-bottom: 10px;
 }
 
 #newsDescription{
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 300;
   margin-top: -15px;
   transition: color 7s;

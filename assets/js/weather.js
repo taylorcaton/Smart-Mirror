@@ -46,13 +46,13 @@ function getWeather(location){
 
         row.append("<div class='col-xs-6'><img src='assets/images/"+icon+".png' alt='Icon depicting current weather.'></div>")
         row.append( "<div class='col-xs-6'><div class='row'>"+
-                    "<div class='text-center' id='temperature'>" + temp + "<sup style='font-size: 16px; top: -1.5em;'>°F</sup></div>"+
-                    "<div class='row'><div class='col-xs-12'><h2 class='text-center' id='condition'>" + description + "</h2></div>"+
+                    "<div class='text-left' id='temperature'>" + temp + "<sup style='font-size: 16px; top: -1.5em;'>°F</sup></div>"+
+                    "<div class='row'><div class='col-xs-12'><h2 class='text-left' id='condition'>" + description + "</h2></div>"+
                     "</div>")
 
         newDiv.append(row);
 
-        row2.append("<div class='col-xs-12'><h2 class='text-center' id='hiLo'>" + 
+        row2.append("<div class='row col-xs-6 col-xs-offset-6'><h2 class='text-left' id='hiLo'>" + 
                     "<i class='fa fa-angle-up' aria-hidden='true'></i>" + hi + 
                     "     <i class='fa fa-angle-down' aria-hidden='true'></i>" + low + "</h2></div>")
         newDiv.append(row2);
