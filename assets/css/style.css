@@ -74,12 +74,14 @@ h4 {
   font-weight: 300;
   transition: color 7s;
   font-size: 23px;
-  margin-top: -7px;
+  margin-top: -38px;
+  margin-left: -14px;
 }
 
 #weatherPane img{
   width: 100%;
   transition: color 7s;
+  margin-top: 21px;
 }
 
 #newsPane{
