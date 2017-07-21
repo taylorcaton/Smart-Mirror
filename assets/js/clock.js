@@ -73,7 +73,7 @@ function displayTime(offset){
   // Set Clock on html
   $("#digitalClock").empty();
   $("#digitalClock").append(dateString);
-  $("#digitalClock").prepend($("<br>"));
+  //$("#digitalClock").prepend($("<br>"));
   var digital = $('<div>').attr('id', 'digitalTime');
   if(timeFormat === "12Hour"){
     $("#digitalClock").prepend(digital.text(timeString12Hour));

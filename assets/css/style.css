@@ -22,10 +22,11 @@ h4 {
 }
 
 #quotePane {
-  font-size: 28px;
+  font-size: 36px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   transition: color 7s;
+  margin-top: 550px;
 }
 
 #quoteAuthor {
@@ -38,22 +39,24 @@ h4 {
 }
 
 #digitalClock {
-    display: block;
-    font-weight: bold;
-    text-align: center;
-    width: 200px;
-    padding: 10px;
-    border:1px solid #000000;
-    transition: color 7s;
+  display: block;
+  text-align: right;
+  width: 400px;
+  font-family: 'Open Sans', sans-serif;
+  transition: color 7s;
+  font-size: 20px;
+  font-weight: 150;
+  padding-top: 40px;
 }
 
 #digitalTime {
-  font-size: 46px;
+  font-size: 58px;
   font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
 }
  
 #analogClock {
-    padding: 10px;
+  padding: 10px;
 }
 
 #temperature {
