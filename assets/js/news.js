@@ -33,7 +33,7 @@ function getNews(input){
           $("#newsPane").append("<div id='newsTitle'><i class='fa fa-newspaper-o' aria-hidden='true'></i> "+articles[i].title+"</div>");
           $("#newsPane").append($("<br>"));
           $("#newsPane").append("<div id='newsDescription'>"+articles[i].description+"</div>");
-          $("#newsPane").append($("<hr>"));
+          $("#newsPane").append($("<br>"));
           $('#newsPane').fadeIn('slow');
         }
   }); // End ajax.done()
