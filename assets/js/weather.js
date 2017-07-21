@@ -53,8 +53,8 @@ function getWeather(location){
         newDiv.append(row);
 
         row2.append("<div class='col-xs-12'><h2 class='text-center' id='hiLo'>" + 
-                    "<div><i class='fa fa-angle-up' aria-hidden='true'></i>" + hi + 
-                    "<div><i class='fa fa-angle-down' aria-hidden='true'></i>" + low + "</h2></div>")
+                    "<i class='fa fa-angle-up' aria-hidden='true'></i>" + hi + 
+                    "     <i class='fa fa-angle-down' aria-hidden='true'></i>" + low + "</h2></div>")
         newDiv.append(row2);
 
         $('#weatherPane').fadeOut('slow', function() {

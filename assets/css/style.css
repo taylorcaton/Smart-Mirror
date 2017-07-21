@@ -74,6 +74,7 @@ h4 {
   font-weight: 300;
   transition: color 7s;
   font-size: 23px;
+  margin-top: -7px;
 }
 
 #weatherPane img{
