@@ -1,6 +1,34 @@
 document.addEventListener("DOMContentLoaded", function() {
+  
+  clearInterval(newsInterval);
   getNews();
 });
+
+var newsInterval;
+
+function displayNews(articles) {
+  var i = 0;
+  drawNews(articles[i]);
+  i++
+  newsInterval = setInterval(function() {
+    console.log(i);
+    $('#newsPane').fadeOut('slow');
+    setTimeout(function(){
+      if (i === articles.length) { i = 0 };
+      drawNews(articles[i]);
+      i++;
+    }, 1000)
+  } , 10000);
+}
+
+function drawNews(article) {
+    $("#newsPane").empty();
+    $('#newsPane').fadeIn('slow');
+    $("#newsPane").append("<div id='newsTitle'><i class='fa fa-newspaper-o' aria-hidden='true'></i> "+article.title+"</div>");
+    $("#newsPane").append($("<br>"));
+    $("#newsPane").append("<div id='newsDescription'>"+article.description+"</div>");
+    $("#newsPane").append($("<br>"));
+}
 
 function getNews(input){
   apiKey = "98a49a60de5b49b18c698cfd0fce0ba5";
@@ -28,14 +56,19 @@ function getNews(input){
 
     // // console.log(articlesDate);
     // Loop through each article and print them on screen
-      for(i = 0; i < 3; i ++){
-        console.log(articles[i]);
-          $("#newsPane").append("<div id='newsTitle'><i class='fa fa-newspaper-o' aria-hidden='true'></i> "+articles[i].title+"</div>");
-          $("#newsPane").append($("<br>"));
-          $("#newsPane").append("<div id='newsDescription'>"+articles[i].description+"</div>");
-          $("#newsPane").append($("<br>"));
-          $('#newsPane').fadeIn('slow');
-        }
+
+    displayNews(articles);
+
+
+
+      // for(i = 0; i < 3; i ++){
+      //   console.log(articles[i]);
+      //     $("#newsPane").append("<div id='newsTitle'><i class='fa fa-newspaper-o' aria-hidden='true'></i> "+articles[i].title+"</div>");
+      //     $("#newsPane").append($("<br>"));
+      //     $("#newsPane").append("<div id='newsDescription'>"+articles[i].description+"</div>");
+      //     $("#newsPane").append($("<br>"));
+      //     $('#newsPane').fadeIn('slow');
+      //   }
   }); // End ajax.done()
 
 } // End getNews()

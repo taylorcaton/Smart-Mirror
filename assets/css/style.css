@@ -22,8 +22,7 @@ h4 {
 }
 
 #quotePane {
-  position: fixed;
-  bottom: 0px;
+
 
   font-size: 32px;
   font-family: 'Open Sans', sans-serif;
@@ -85,17 +84,21 @@ h4 {
 }
 
 #newsPane{
-  padding-left: 115px;
+  font-family: 'Open Sans', sans-serif;
+  padding: 0px 100px 0px 100px;
+  position: fixed;
+  bottom: 0px;
 }
 
 #newsTitle{
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 32px;
+  font-weight: 300;
   transition: color 7s;
+  margin-bottom: 10px;
 }
 
 #newsDescription{
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 300;
   margin-top: -15px;
   transition: color 7s;
