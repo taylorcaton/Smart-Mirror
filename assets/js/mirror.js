@@ -4,25 +4,49 @@ var dbTimeZone = "";
 var dbNewsSource = "";
 var rainbowInterval;
 
-db.ref().on('value', function(snap) {
-	dbTimeZone = snap.val().timezone;
-	dbNewsSource = snap.val().newsSource;
-	if(snap.val().locationName === "unknown"){
-		unknownWeather();
-	}else{
-		console.log("new weather location from firebase")
-		getWeather(snap.val().location);
-		hourCorrection(snap.val().timezone);
-	}
-	clearInterval(newsInterval);
-	getNews(dbNewsSource);
+//db.ref().on('value', function(snap) {
+	//dbTimeZone = snap.val().timezone;
+	//dbNewsSource = snap.val().newsSource;
+	//if(snap.val().locationName === "unknown"){
+	//	unknownWeather();
+	//}else{
+	//	console.log("new weather location from firebase")
+	//	getWeather(snap.val().location);
+		//hourCorrection(snap.val().timezone);
+	//}
+	//clearInterval(newsInterval);
+	//getNews(dbNewsSource);
 
-    if(snap.val().digitalClockStyle === "military"){
+    //if(snap.val().digitalClockStyle === "military"){
     	//show24HourTime();
+    //}
+
+    //return [dbTimeZone, dbNewsSource];
+
+//})
+
+db.ref('newsSource').on('value', function(snap) {
+    clearInterval(newsInterval)
+    getNews(snap.val());
+})
+
+db.ref('timezone').on('value', function(snap) {
+    hourCorrection(snap.val());
+})
+
+db.ref('location').on('value', function(snap) {
+    if(snap.val().locationName === "unknown"){
+        unknownWeather();
+    }else{
+        console.log("new weather location from firebase")
+        getWeather(snap.val());
     }
+})
 
-    return [dbTimeZone, dbNewsSource];
-
+db.ref('digitalClockStyle').on('value', function(snap) {
+    if(snap.val() === 'military') {
+        //show24HourTime();
+    }
 })
 
 db.ref('color').on('value', function(snap) {
@@ -30,13 +54,14 @@ db.ref('color').on('value', function(snap) {
     if (color === "rainbow") {
         rainbow();
     } else {
-        clearInterval(rainbowInterval);
-        $('#weatherPane').css('color', color);
-        $('#clockPane').css('color', color);
-        $('#newsPane').css('color', color);
-        $('#quotePane').css('color', color);
-        $('#condition').css('color', color);
-        $('#hiLo').css('color', color);
+        changeColor(color);
+        // clearInterval(rainbowInterval);
+        // $('#weatherPane').css('color', color);
+        // $('#clockPane').css('color', color);
+        // $('#newsPane').css('color', color);
+        // $('#quotePane').css('color', color);
+        // $('#condition').css('color', color);
+        // $('#hiLo').css('color', color);
         
     }
 })
@@ -72,4 +97,14 @@ function rainbow() {
             i=0;
         }
     }, 5000);    
+}
+
+function changeColor(color) {
+    clearInterval(rainbowInterval);
+    $('#weatherPane').css('color', color);
+    $('#clockPane').css('color', color);
+    $('#newsPane').css('color', color);
+    $('#quotePane').css('color', color);
+    $('#condition').css('color', color);
+    $('#hiLo').css('color', color);    
 }
