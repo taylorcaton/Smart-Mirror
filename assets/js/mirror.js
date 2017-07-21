@@ -1,6 +1,6 @@
 // Make a new API call and re-draw the weather results when the db changes
 
-var dbTimeZone = "";
+var dbTimeZone = "America/New_York";
 var dbNewsSource = "";
 var rainbowInterval;
 
@@ -10,7 +10,10 @@ db.ref('newsSource').on('value', function(snap) {
 })
 
 db.ref('timezone').on('value', function(snap) {
+    dbTimeZone = snap.val();
+    console.log("db.timezone changed to " + snap.val())
     hourCorrection(snap.val());
+    return dbTimeZone;
 })
 
 db.ref('location').on('value', function(snap) {
