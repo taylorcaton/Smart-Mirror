@@ -34,6 +34,7 @@ db.ref('color').on('value', function(snap) {
         $('#newsPane').css('color', color);
         $('#quotePane').css('color', color);
         $('#condition').css('color', color);
+        $('#hiLo').css('color', color);
         window.clearInterval();
     }
 })
@@ -53,7 +54,7 @@ function getQuotes(){
 function rainbow() {
     var colors = ["rgb(255,0,0)", "rgb(255,127,0)", "rgb(255,255,0)", "rgb(127,255,0)", 
         "rgb(0,255,0)", "rgb(0,255,127)", "rgb(0,255,255)", "rgb(0,127,255)",
-        "rgb(0,0,255)", "rgb(127,0,255)", "rgb(255,0,255)", "rgb(255,0,127)"];
+         "rgb(127,0,255)", "rgb(255,0,255)", "rgb(255,0,127)"];
 
     var i = 1;
 
@@ -63,6 +64,7 @@ function rainbow() {
         $('#newsPane').css('color', colors[i]);
         $('#quotePane').css('color', colors[i]);
         $('#condition').css('color', colors[i]);
+        $('#hiLo').css('color', colors[i]);
         i++;
         if (i === colors.length){
             i=0;
