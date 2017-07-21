@@ -22,9 +22,7 @@ h4 {
 }
 
 #quotePane {
-
-
-  font-size: 32px;
+  font-size: 28px;
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   transition: color 7s;
@@ -36,6 +34,7 @@ h4 {
 
 #quoteText {
   margin: 15px;
+  text-align: center;
 }
 
 #digitalClock {
