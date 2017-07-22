@@ -4,8 +4,20 @@ document.addEventListener("DOMContentLoaded", function() {
 
 var timeFormat = "12Hour";
 var timeCorrected = false;
+var dbTime = "";
+
+function getTime(input){
+  var localTime = moment();
+  var h = localTime.hour();
+  var m = localTime.minutes();
+  var s = localTime.seconds()
+  var dow = localTime.isoWeekday();
+  var timeString = formatHour(h) + ":" + padZero(m) + " " + getTimePeriod(h);
+  console.log(timeString);
+}
 
 function hourCorrection(timeZone){
+  console.log("hourCorrection() is " + timeZone);
   if(timeZone === "America/New_York"){
     timeZoneOffset = -4;
   } else if(timeZone === "America/Chicago"){
@@ -13,7 +25,7 @@ function hourCorrection(timeZone){
   } else if(timeZone === "America/Denver"){
     timeZoneOffset = -6;
   }
-  else if(timeZone == "America/Los_Angeles"){
+  else if(timeZone === "America/Los_Angeles"){
     timeZoneOffset = -7;
   } else {
     timeZoneOffset = 0;
@@ -49,6 +61,19 @@ function dayHourCorrection(hourCheck, dayCheck){
   return hour;
 }
 
+// I should make an array to hold the day of weeks
+function dowCorrection(hourCheck, dowOffest){
+  hour = hourCheck;
+  dow = dowCheck;
+  if(hour <= 0){
+    // console.log("oops the day rolled");
+    day --;
+    hour = 24 + hour;
+  } else {
+    return hour;
+  }
+  return dow;
+}
 
 function displayTime(offset){
   // Inital Variables
@@ -143,7 +168,7 @@ function displayTime(offset){
   // Clear the canvas then draw the current arms
   contextHands.clearRect(0, 0, canvas.width, canvas.height);
   contextClock.clearRect(0, 0, canvas.width, canvas.height);
-  drawArm(hour / 12, 6, 0.50, "#ffffff"); // Hour
+  drawArm(hourOffset / 12, 6, 0.50, "#ffffff"); // Hour
   drawArm(minute / 60,  4, 0.75, "#ffffff"); // Minute
   drawArm(second / 60,  2, 1.00, "#ffffff"); // Second
   drawNotches()

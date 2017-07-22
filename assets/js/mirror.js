@@ -1,29 +1,8 @@
 // Make a new API call and re-draw the weather results when the db changes
 
-var dbTimeZone = "";
+var dbTimeZone = "America/New_York";
 var dbNewsSource = "";
 var rainbowInterval;
-
-//db.ref().on('value', function(snap) {
-	//dbTimeZone = snap.val().timezone;
-	//dbNewsSource = snap.val().newsSource;
-	//if(snap.val().locationName === "unknown"){
-	//	unknownWeather();
-	//}else{
-	//	console.log("new weather location from firebase")
-	//	getWeather(snap.val().location);
-		//hourCorrection(snap.val().timezone);
-	//}
-	//clearInterval(newsInterval);
-	//getNews(dbNewsSource);
-
-    //if(snap.val().digitalClockStyle === "military"){
-    	//show24HourTime();
-    //}
-
-    //return [dbTimeZone, dbNewsSource];
-
-//})
 
 db.ref('newsSource').on('value', function(snap) {
     clearInterval(newsInterval)
@@ -31,7 +10,10 @@ db.ref('newsSource').on('value', function(snap) {
 })
 
 db.ref('timezone').on('value', function(snap) {
+    dbTimeZone = snap.val();
+    console.log("db.timezone changed to " + snap.val())
     hourCorrection(snap.val());
+    return dbTimeZone;
 })
 
 db.ref('location').on('value', function(snap) {
