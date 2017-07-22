@@ -4,29 +4,74 @@ document.addEventListener("DOMContentLoaded", function() {
 
 var timeFormat = "12Hour";
 var timeCorrected = false;
-var dbTime = "";
+// var dbTime = "";
 
-function getTime(input){
-  var localTime = moment();
-  var h = localTime.hour();
-  var m = localTime.minutes();
-  var s = localTime.seconds()
-  var dow = localTime.isoWeekday();
-  var timeString = formatHour(h) + ":" + padZero(m) + " " + getTimePeriod(h);
-  console.log(timeString);
-}
+// function getTime(input){
+//   var localTime = moment();
+//   var h = localTime.hour();
+//   var m = localTime.minutes();
+//   var s = localTime.seconds()
+//   var dow = localTime.isoWeekday();
+//   var timeString = formatHour(h) + ":" + padZero(m) + " " + getTimePeriod(h);
+//   console.log(timeString);
+// }
 
 function hourCorrection(timeZone){
-  console.log("hourCorrection() is " + timeZone);
-  if(timeZone === "America/New_York"){
+  // console.log("hourCorrection() is " + timeZone);
+  if(timeZone === ""){
+    timeZoneOffset = 0;
+  } else if(timeZone === "Europe/Madrid"){
+    timeZoneOffset = -1;
+  } else if(timeZone === "Atlantic/Cape_Verde"){
+    timeZoneOffset = -2;
+  } else if(timeZone === "Indian/Reunion"){
+    timeZoneOffset = -3;
+  } else if(timeZone === "America/New_York"){
     timeZoneOffset = -4;
   } else if(timeZone === "America/Chicago"){
     timeZoneOffset = -5;
   } else if(timeZone === "America/Denver"){
     timeZoneOffset = -6;
-  }
-  else if(timeZone === "America/Los_Angeles"){
+  } else if(timeZone === "America/Los_Angeles"){
     timeZoneOffset = -7;
+  } else if(timeZone === "America/Anchorage"){
+    timeZoneOffset = -8;
+  } else if(timeZone === "Pacific/Marquesas"){
+    timeZoneOffset = -9;
+  } else if(timeZone === "Pacific/Gambier"){
+    timeZoneOffset = -10;
+  } else if(timeZone === "Pacific/Pago_Pago"){
+    timeZoneOffset = -11;
+  } else if(timeZone === "Asia/Jakarta"){
+    timeZoneOffset = -12;
+  } else if(timeZone === "Pacific/Auckland"){
+    timeZoneOffset = +14;
+  } else if(timeZone === "Pacific/Tarawa"){
+    timeZoneOffset = +13;
+  } else if(timeZone === "Pacific/Tongatapu"){
+    timeZoneOffset = +12;
+  } else if(timeZone === "Pacific/Efate"){
+    timeZoneOffset = +11;
+  } else if(timeZone === "Asia/Vladivostok"){
+    timeZoneOffset = +10;
+  } else if(timeZone === "Asia/Tokyo"){
+    timeZoneOffset = +9;
+  } else if(timeZone === "Asia/Shanghai"){
+    timeZoneOffset = +8;
+  } else if(timeZone === "Asia/Jakarta"){
+    timeZoneOffset = +7;
+  } else if(timeZone === "Asia/Almaty"){
+    timeZoneOffset = +6;
+  } else if(timeZone === "Asia/Tashkent"){
+    timeZoneOffset = +5;
+  } else if(timeZone === "Asia/Yerevan"){
+    timeZoneOffset = +4;
+  } else if(timeZone === "Asia/Bahrain"){
+    timeZoneOffset = +3;
+  } else if(timeZone === "Europe/Tirane"){
+    timeZoneOffset = +2;
+  } else if(timeZone === "Africa/Algiers"){
+    timeZoneOffset = +1;
   } else {
     timeZoneOffset = 0;
     console.log("Timezone is unrecognized. Time is in UTC +0")

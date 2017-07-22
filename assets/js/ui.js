@@ -76,6 +76,7 @@ $(document).ready(function() {
     
   })
 
+
   // When clock style 'digital' is selected, enable the option for 12-hour / military time
   $('#digitalAnalogVal').on('change', function() {
     var style = $('#digitalAnalogVal').val();
@@ -115,7 +116,7 @@ $(document).ready(function() {
     // Update the weather app to display the current location
     $('#currentLoc').text("Current Location: " + sv);
 
-  })
+  });
 
   // If the location API request returns an error, handle it and alert the user
   db.ref('errorID').on('value', function(snap) {
@@ -129,7 +130,18 @@ $(document).ready(function() {
       firstLoadError = false;
     } 
 
-  })
+  });
+
+  // When db.newsOn is set to true This will show the top news stories for that source on the UI.html page
+  // and when you click on that story it will take you to the story on a new tab or window
+  db.ref('newsOn').on('value', function(snap) {
+    var sv = snap.val();
+    if(sv === true){
+      console.log("user wants to see news stories");
+    } else {
+      console.log("user does not want to see news stories");
+    }
+  });
 
 //======= Color Picker ===============================================================
 
