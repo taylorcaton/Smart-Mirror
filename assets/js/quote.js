@@ -4,7 +4,7 @@ function getQuote(){
     dataType: "jsonp",
     data: "method=getQuote&format=jsonp&lang=en&jsonp=?",
     success: function( response ) {
-      console.log(response);
+      // console.log(response);
       var author = response.quoteAuthor;
       var verifiedAuthor;
       if(author === ""){

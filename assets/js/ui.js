@@ -134,14 +134,14 @@ $(document).ready(function() {
 
   // When db.newsOn is set to true This will show the top news stories for that source on the UI.html page
   // and when you click on that story it will take you to the story on a new tab or window
-  db.ref('newsOn').on('value', function(snap) {
-    var sv = snap.val();
-    if(sv === true){
-      console.log("user wants to see news stories");
-    } else {
-      console.log("user does not want to see news stories");
-    }
-  });
+  // db.ref('newsOn').on('value', function(snap) {
+  //   var sv = snap.val();
+  //   if(sv === true){
+  //     console.log("User wants to see news stories");
+  //   } else {
+  //     console.log("User does not want to see news stories");
+  //   }
+  // });
 
 //======= Color Picker ===============================================================
 

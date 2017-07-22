@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-  getNews();
+  getNews("ars-technica");
 });
+
+// The news source on inital start was undefined how I wrote above function. I defaulted that it would be ars-technica.
+// What if we assign that variable to local storage so it will save thier last choice if they close the website?
 
 var newsInterval;
 
@@ -38,7 +41,7 @@ function getNews(input){
     url: queryUrl,
     method: "GET"
   }).done(function(response) {
-    console.log(response);
+    // console.log(response);
     var articles = response.articles;
     $("#newsPane").empty();
     // var table = $("<table>");
