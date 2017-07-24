@@ -23,6 +23,8 @@ h4 {
 
 #clockWrapper{
   float: right;
+  position: fixed;
+  right: 0px;
 }
 
 #quotePane {
