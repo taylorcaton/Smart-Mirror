@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
   startTimer();
 });
 
-var timeFormat = "12Hour";
+var timeFormat;
 var timeCorrected = false;
 // var dbTime = "";
 
@@ -148,7 +148,7 @@ function displayTime(offset){
   if(timeFormat === "12Hour"){
     $("#digitalClock").prepend(digital.text(timeString12Hour));
   } else {
-    $("#digitalClock").prepend(timeString24Hour);
+    $("#digitalClock").prepend(digital.text(timeString24Hour));
   }
   // Creating the Analog Clock
   var canvas = document.querySelector("#analogClock");
@@ -329,7 +329,6 @@ function showDigitalClock(){
 function showAnalogClock(){
   $("#analogClock").show();
   $("#digitalClock").hide();
-  timeFormat = "12Hour";
 } // end showAnalogClock()
 
 function show24HourTime(){
@@ -339,3 +338,11 @@ function show24HourTime(){
 function show12HourTime(){
   timeFormat = "12Hour"
 } // end show12HourTime()
+
+db.ref('digitalClockStyle').on('value', function(snap) {
+  if (snap.val() === 'twelveHour') {
+    show12HourTime();
+  } else if (snap.val() ==='military') {
+    show24HourTime();
+  }
+})
