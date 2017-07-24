@@ -1,30 +1,10 @@
-// Make a new API call and re-draw the weather results when the db changes
+
 
 var dbTimeZone = "";
 var dbNewsSource = "";
 var rainbowInterval;
 
-//db.ref().on('value', function(snap) {
-	//dbTimeZone = snap.val().timezone;
-	//dbNewsSource = snap.val().newsSource;
-	//if(snap.val().locationName === "unknown"){
-	//	unknownWeather();
-	//}else{
-	//	console.log("new weather location from firebase")
-	//	getWeather(snap.val().location);
-		//hourCorrection(snap.val().timezone);
-	//}
-	//clearInterval(newsInterval);
-	//getNews(dbNewsSource);
-
-    //if(snap.val().digitalClockStyle === "military"){
-    	//show24HourTime();
-    //}
-
-    //return [dbTimeZone, dbNewsSource];
-
-//})
-
+// update the news section when DB values change
 db.ref('newsSource').on('value', function(snap) {
     clearInterval(newsInterval)
     getNews(snap.val());
@@ -34,6 +14,7 @@ db.ref('timezone').on('value', function(snap) {
     hourCorrection(snap.val());
 })
 
+// if the location entered is valid, call getWeather, otherwise set location to 'unknown'
 db.ref('location').on('value', function(snap) {
     if(snap.val().locationName === "unknown"){
         unknownWeather();
@@ -49,6 +30,7 @@ db.ref('digitalClockStyle').on('value', function(snap) {
     }
 })
 
+// show digital or analog clock depending on user selection
 db.ref('clockStyle').on('value', function(snap) {
     if (snap.val() === 'analog') {
         showAnalogClock()
@@ -57,22 +39,32 @@ db.ref('clockStyle').on('value', function(snap) {
     }
 })
 
+// when the color changes, either start the rainbow function or simple chamge the colors
 db.ref('color').on('value', function(snap) {
     var color = snap.val();
     if (color === "rainbow") {
         rainbow();
     } else {
         changeColor(color);
-        // clearInterval(rainbowInterval);
-        // $('#weatherPane').css('color', color);
-        // $('#clockPane').css('color', color);
-        // $('#newsPane').css('color', color);
-        // $('#quotePane').css('color', color);
-        // $('#condition').css('color', color);
-        // $('#hiLo').css('color', color);
-        
     }
 })
+
+db.ref('weatherOn').on('value', function(snap) {
+    hideWeather(snap.val());
+})
+
+db.ref('clockOn').on('value', function(snap) {
+    hideClock(snap.val());
+})
+
+db.ref('newsOn').on('value', function(snap) {
+    hideNews(snap.val());
+})
+
+db.ref('quoteOn').on('value', function(snap) {
+    hideQuote(snap.val());
+})
+
 
 document.addEventListener("DOMContentLoaded", function() {
 	getQuotes();
@@ -107,6 +99,7 @@ function rainbow() {
     }, 5000);    
 }
 
+// when user changes text color, update all the text colors
 function changeColor(color) {
     clearInterval(rainbowInterval);
     $('#weatherPane').css('color', color);
@@ -115,4 +108,36 @@ function changeColor(color) {
     $('#quotePane').css('color', color);
     $('#condition').css('color', color);
     $('#hiLo').css('color', color);    
+}
+
+function hideWeather(val) {
+    if (val === true) {
+        $('#weatherPane').removeClass('hidden');
+    } else {
+        $('#weatherPane').addClass('hidden');
+    }
+}
+
+function hideClock(val) {
+    if (val === true) {
+        $('#clockPane').removeClass('hidden');
+    } else {
+        $('#clockPane').addClass('hidden');
+    }
+}
+
+function hideNews(val) {
+    if (val === true) {
+        $('#newsPane').removeClass('hidden');
+    } else {
+        $('#newsPane').addClass('hidden');
+    }
+}
+
+function hideQuote(val) {
+    if (val === true) {
+        $('#quotePane').removeClass('hidden');
+    } else {
+        $('#quotePane').addClass('hidden');
+    }
 }
