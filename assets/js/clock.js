@@ -2,20 +2,13 @@ document.addEventListener("DOMContentLoaded", function() {
   startTimer();
 });
 
+// Initial Values
 var timeFormat;
 var timeCorrected = false;
-// var dbTime = "";
 
-// function getTime(input){
-//   var localTime = moment();
-//   var h = localTime.hour();
-//   var m = localTime.minutes();
-//   var s = localTime.seconds()
-//   var dow = localTime.isoWeekday();
-//   var timeString = formatHour(h) + ":" + padZero(m) + " " + getTimePeriod(h);
-//   console.log(timeString);
-// }
-
+// Function to solve which Timezone the weather is getting pulled from. This will create the offset
+// that will correct the time from UTC time, to local time. We could use the local time from the 
+// API call, but we would hit a limit of our API Calls.
 function hourCorrection(timeZone){
   // console.log("hourCorrection() is " + timeZone);
   if(timeZone === ""){
@@ -56,7 +49,7 @@ function hourCorrection(timeZone){
     timeZoneOffset = +10;
   } else if(timeZone === "Asia/Tokyo"){
     timeZoneOffset = +9;
-  } else if(timeZone === "Asia/Shanghai"){
+  } else if(timeZone === "Asia/Shanghai" || timeZone === "Asia/Manila"){
     timeZoneOffset = +8;
   } else if(timeZone === "Asia/Jakarta"){
     timeZoneOffset = +7;
@@ -80,65 +73,117 @@ function hourCorrection(timeZone){
   return timeZoneOffset
 }
 
+// Function that will correct the day if the timeZoneOffset has caused the day to roll back.
 function dayCorrection(hourCheck, dayCheck){
   hour = hourCheck;
   day = dayCheck;
   if(hour <= 0){
-    // console.log("oops the day rolled");
-    day --;
+    // console.log("Day Rolled Backwards");
+    day--;
+    dayOfWeek--;
     hour = 24 + hour;
-  } else {
+  } else if(hour > 24){
+    // console.log("Day Rolled Forward");
+    day++;
+  }  else {
     return day;
   }
   return day;
 }
 
+// Function will correct the hour from being negative if it rolls under 0, by adding 24 to the 
+// negative number, giving you the 24 hour value of the prior day.
 function dayHourCorrection(hourCheck, dayCheck){
   hour = hourCheck;
   day = dayCheck;
   if(hour <= 0){
-    // console.log("oops the day rolled");
-    day --;
-    hour = 24 + hour;
+    dayOfWeekOffset = 1;
+    hour = 24 + hour; 
+  } else if(hour > 24){
+    hour = hour - 24; 
   } else {
+    dayOfWeekOffset = -1;
     return hour;
   }
   return hour;
 }
 
-// I should make an array to hold the day of weeks
-function dowCorrection(hourCheck, dowOffest){
+// Function to correct the day of the week.
+function dowCorrection(hourCheck, offset){
   hour = hourCheck;
-  dow = dowCheck;
+  dow = offset;
   if(hour <= 0){
-    // console.log("oops the day rolled");
-    day --;
-    hour = 24 + hour;
-  } else {
-    return hour;
+    // console.log("Day Rolled Backwards");
+    dow--;
+  } else if(hour > 24){
+    console.log("Day Rolled Forward");
+    dow++;
+  }  else {
+    return offset;
   }
-  return dow;
+  return offset;
 }
 
+
+// Function that pulls the time from moment.js of the time right now in UTC +0.
 function displayTime(offset){
   // Inital Variables
-  var time = moment.utc();
-  var tzOffset = hourCorrection(dbTimeZone);
-  var hour = time.hour();
-  var hourOffset = parseInt(hour) + parseInt(tzOffset);
-  var minute = time.minutes();
-  var second = time.seconds();
-  var year = time.year();
-  var month = time.month();
-  var day = time.date();
-  var dayOfWeek = time.isoWeekday();
-  var dayOffset = dayCorrection(hourOffset, day);
-  var dayHourOffset = dayHourCorrection(hourOffset, day);
-  var checkedDay = /[^,]*/.exec(dayOffset)[0];
-  var checkedDayHour = /[^,]*/.exec(dayHourOffset)[0];
-  var timeString12Hour = formatHour(checkedDayHour) + ":" + padZero(minute) + " " + getTimePeriod(checkedDayHour);
-  var timeString24Hour = padZero(checkedDayHour) + ":" + padZero(minute);
-  var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + checkedDay + ", " + year;
+
+  var time = moment.utc(); // Pulls current time in UTC.
+  
+
+  var foo = moment().add(tzOffset,'hour');
+  console.log(foo);
+
+
+  var tzOffset = hourCorrection(dbTimeZone); // Gets timezone offset from database timeZone entry, then runs through the hour correction function
+  var hour = time.hour(); // Gets current hour
+  var hourOffset = parseInt(hour) + parseInt(tzOffset); // offsets hour by adding the timezone Offset
+  var dayHourOffset = dayHourCorrection(hourOffset, day); // If time is over 24 or under 0 it will correct the time, them affect the day accordingly.
+  var minute = time.minutes(); // Gets current minute
+  var second = time.seconds(); // Gets current seconds
+  var day = time.date(); // Gets current day
+  var dayOffset = dayCorrection(hourOffset, day); // Corrected day if hour was above 24 or under 0
+  // var checkedDay = /[^,]*/.exec(dayOffset)[0]; // Pulls first response from dayOffset Return
+  // var checkedDayHour = /[^,]*/.exec(dayHourOffset)[0]; // Pulls first response from dayHourOffset
+  var month = time.month(); // Gets current month
+  var year = time.year(); // Gets current year
+  var dayOfWeek = time.isoWeekday(); // Gets current day of week
+  var dayOfWeekOffset = dowCorrection(hourOffset, dayOfWeek);
+  var dayOfWeekCorrection = dayOfWeek + dayOfWeekOffset; //dowCorrection(hour, dayOfWeek); // Corrected day of week if hour was above 24 or under 0
+  var timeString12Hour = formatHour(dayHourOffset) + ":" + padZero(minute) + " " + getTimePeriod(dayHourOffset);
+  var timeString24Hour = padZero(dayHourOffset) + ":" + padZero(minute);
+  var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + dayOffset + ", " + year;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // Set Clock on html
   $("#digitalClock").empty();
