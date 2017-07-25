@@ -128,14 +128,7 @@ function dowCorrection(hourCheck, offset){
 // Function that pulls the time from moment.js of the time right now in UTC +0.
 function displayTime(offset){
   // Inital Variables
-
   var time = moment.utc(); // Pulls current time in UTC.
-  
-
-  var foo = moment().add(tzOffset,'hour');
-  console.log(foo);
-
-
   var tzOffset = hourCorrection(dbTimeZone); // Gets timezone offset from database timeZone entry, then runs through the hour correction function
   var hour = time.hour(); // Gets current hour
   var hourOffset = parseInt(hour) + parseInt(tzOffset); // offsets hour by adding the timezone Offset
@@ -144,8 +137,6 @@ function displayTime(offset){
   var second = time.seconds(); // Gets current seconds
   var day = time.date(); // Gets current day
   var dayOffset = dayCorrection(hourOffset, day); // Corrected day if hour was above 24 or under 0
-  // var checkedDay = /[^,]*/.exec(dayOffset)[0]; // Pulls first response from dayOffset Return
-  // var checkedDayHour = /[^,]*/.exec(dayHourOffset)[0]; // Pulls first response from dayHourOffset
   var month = time.month(); // Gets current month
   var year = time.year(); // Gets current year
   var dayOfWeek = time.isoWeekday(); // Gets current day of week
@@ -154,51 +145,20 @@ function displayTime(offset){
   var timeString12Hour = formatHour(dayHourOffset) + ":" + padZero(minute) + " " + getTimePeriod(dayHourOffset);
   var timeString24Hour = padZero(dayHourOffset) + ":" + padZero(minute);
   var dateString = formatDayOfWeek(dayOfWeek) + " " + formatMonth(month) + " " + dayOffset + ", " + year;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
   // Set Clock on html
   $("#digitalClock").empty();
   $("#digitalClock").append(dateString);
-  //$("#digitalClock").prepend($("<br>"));
   var digital = $('<div>').attr('id', 'digitalTime');
   if(timeFormat === "12Hour"){
     $("#digitalClock").prepend(digital.text(timeString12Hour));
   } else {
     $("#digitalClock").prepend(digital.text(timeString24Hour));
   }
+
   // Creating the Analog Clock
   var canvas = document.querySelector("#analogClock");
   var context = canvas.getContext('2d');
-  drawClockFace("#000000", "#ffffff"); // Clock Face
   var contextHands = canvas.getContext("2d");
   var contextClock = canvas.getContext("2d");
   var clockRadius = 100;
@@ -206,17 +166,13 @@ function displayTime(offset){
   // Define center of clock
   var clockX = canvas.width / 2;
   var clockY = canvas.height / 2;
-    contextClock.beginPath();
-    contextClock.arc(clockX, clockY, 97, 0 * Math.PI, 2 * Math.PI);
-    contextClock.fillStyle = "#000000";
-    contextClock.fill();
-    contextClock.lineWidth = 3;
-    contextClock.strokeColor = "#ffffff";
-    contextClock.stroke();
-
-  // Create clock face
-  function drawClockFace(fill, outline){
-  }// End drawClockFace()
+  contextClock.beginPath();
+  contextClock.arc(clockX, clockY, 97, 0 * Math.PI, 2 * Math.PI);
+  contextClock.fillStyle = "#000000";
+  contextClock.fill();
+  contextClock.lineWidth = 3;
+  contextClock.strokeColor = "#ffffff";
+  contextClock.stroke();
 
   // Create Hour Hands
   Math.TAU = 2 * Math.PI;
