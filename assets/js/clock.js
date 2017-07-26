@@ -80,7 +80,6 @@ function dayCorrection(hourCheck, dayCheck){
   if(hour <= 0){
     // console.log("Day Rolled Backwards");
     day--;
-    dayOfWeek--;
     hour = 24 + hour;
   } else if(hour > 24){
     // console.log("Day Rolled Forward");
@@ -274,7 +273,6 @@ function formatDayOfWeek(dayCheck){
 
 function formatMonth(monthCheck){
   var month = monthCheck;
-  console.log(monthCheck);
   switch(month){
     case 0:
       month = "January";
