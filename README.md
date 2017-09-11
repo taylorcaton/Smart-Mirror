@@ -1,5 +1,5 @@
 # Mirror Mirror
-## Smart Mirror Project
+### Smart Mirror Project
 
 ### A web app that runs behind a two-way mirror.
 ### A team based project at the UNCC Bootcamp
